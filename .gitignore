@@ -1,0 +1,19 @@
+# Build outputs
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Cloudflare Wrangler
+.wrangler/
+
+# Environment secrets
+.env
+.env.production
+.env.local
+*.local
+
+# System files
+.DS_Store
+Thumbs.db

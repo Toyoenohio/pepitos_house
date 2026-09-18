@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from '../lib/productsData';
+import ProductCatalog from '../components/menu/ProductCatalog';
+---
+
+<BaseLayout 
+  title="Pepitos House 251 | Auténtico Sabor Guaro en Barcelona, Lechería y PLC"
+  description="Los mejores pepitos guaros con lomito, pecorino y salsas de la casa. Delivery en Barcelona, Lechería y Puerto La Cruz, Anzoátegui."
+>
+  <div class="max-w-6xl mx-auto w-full px-3 md:px-6 py-6 space-y-10">
+
+    <!-- Hero Section -->
+    <section class="bg-brandYellow rounded-3xl border-4 border-black p-6 sm:p-10 shadow-brutal-lg relative overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="space-y-5">
+          <div class="inline-flex items-center gap-2 bg-white px-3.5 py-1 rounded-full border-2 border-black shadow-brutal">
+            <span class="text-xl">🔥</span>
+            <span class="font-display font-black text-xs uppercase tracking-wider">
+              Auténtico Sabor Guaro en Cada Bocado
+            </span>
+          </div>
+
+          <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight leading-[0.95]">
+            PEPITOS DE <br /><span class="text-brandBlue">HASTA 1 METRO</span>
+          </h1>
+
+          <p class="text-sm sm:text-base font-semibold text-black/85 leading-relaxed">
+            Llena tu mesa con lomito angus, pan suave y recién tostado, lluvia de pecorino y las trádicionales salsas de la casa. Delivery directo a Barcelona, Lechería y Puerto La Cruz.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <a 
+              href="/menu" 
+              class="bg-black hover:bg-brandBlue transition text-white font-display font-black px-6 py-3.5 rounded-full border-2 border-black shadow-brutal uppercase text-sm flex items-center gap-2"
+            >
+              <span>🞜 VER MENÚ Y PEDIR</span>
+            </a>
+            <a 
+              href="/membresia" 
+              class="bg-white hover:bg-black hover:text-white transition text-black font-display font-black px-5 py-3.5 rounded-full border-2 border-black shadow-brutal uppercase text-sm flex items-center gap-2"
+            >
+              <span>п🎂</span>
+              <span>TARJETA DE SELLOS</span>
+            </a>
+          </div>
+
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-4 text-xs font-bold text-black/70 pt-2">
+            <div class="flex items-center gap-1.5">
+              <span class="text-green-600">✓</span> 30cm, 50cm y 1 Metro
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-green-600">✓</span> Pago Móvil BCV, Zelle
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-green-600">✓</span> Delivery Anzoátegui
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Image Card -->
+        <div class="flex items-center justify-center relative">
+          <div class="wfull max-w-sm rounded-3xl border-4 border-black bg-white shadow-brutal-lg overflow-hidden transform hover:rotate-1 transition-transform">
+            <div class="bg-brandBlue p-4 border-b-2 border-black flex items-center justify-between text-white">
+              <span class="font-display font-black text-sm uppercase">п👹 Consiente al Chucho</span>
+              <span class="bg-brandYellow text-black font-black text-[10px] px-2 py-0.5 rounded-full border border-black">100% lomito</span>
+            </div>
+            <div class="p-4">
+              <img 
+                src="https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80" 
+                alt="Pepito Tradicional 251"
+                class="w-full h-64 object-cover rounded-2xl border-2 border-black"
+              />
+              <div class="mt-3 flex items-center justify-between">
+                <div>
+                  <h3 class="font-display font-black text-base uppercase">Pepito Mixto Supreme</h3>
+                  <span class="text-xs font-bold text-gray-600">Lomito, Pollo, tocineta y queso de mano</span>
+                </div>
+                <span class="font-display font-black text-xl text-brandBlue">$11.50</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Features Section -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="bg-white p-5 sm:p-6 rounded-2xl border-3 border-black shadow-brutal space-y-2">
+        <span class="text-3xl">💦</span>
+        <h3 class="font-display font-black text-base uppercase">Pago en Tu Moneda</h3>
+        <p class="text-xs text-gray-600 font-semibold">
+          Paga cómodamente con Pago Móvil (Tasa BCV), Zelle, Efectivo USD o Punto de Venta.
+        </p>
+      </div>
+
+      <div class="bg-white p-5 sm:p-6 rounded-2xl border-3 border-black shadow-brutal space-y-2">
+        <span class="text-3xl">🔵</span>
+        <h3 class="font-display font-black text-base uppercase">Delivery Ruta Guara</h3>
+        <p class="text-xs text-gray-600 font-semibold">
+          Entrega rápida en Barcelona, Lechería y Puerto La Cruz. Tu pepito llega calientico.
+        </p>
+      </div>
+
+      <div class="bg-white p-5 sm:p-6 rounded-2xl border-3 border-black shadow-brutal space-y-2">
+        <span class="text-3xl">🎂</span>
+        <h3 class="font-display font-black text-base uppercase">10 Sellos = 1 Gratis</h3>
+        <p class="text-xs text-gray-600 font-semibold">
+          Acumula sellos digitales con tu correo en cada pedido y reclama tu prequio.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- Menu Preview / Interactive Catalog -->
+    <section id="menu-catalog" class="pt-6">
+      <ProductCatalog 
+        products={INITIAL_PRODUCTS} 
+        categories={INITIAL_CATEGORIES} 
+        client:load 
+      />
+    </section>
+
+  </div>
+</BaseLayout>

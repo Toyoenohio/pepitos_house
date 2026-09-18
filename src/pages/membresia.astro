@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LoyaltyCard from '../components/loyalty/LoyaltyCard';
+---
+
+<BaseLayout 
+  title="Tarjeta de Sellos | Pepitos House 251"
+  description="Consulta tu tarjeta de fidelización digital. 10 sellos = 1 Pepito gratis."
+>
+
+  <div class="max-w-6xl mx-auto w-full px-3 md:px-6 py-10">
+    <LoyaltyCard client:load />
+  </div>
+</BaseLayout>

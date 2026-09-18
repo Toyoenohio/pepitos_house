@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from '../lib/productsData';
+import ProductCatalog from '../components/menu/ProductCatalog';
+---
+
+<BaseLayout 
+  title="Menú 251 | Pepitos House 251"
+  description="Consulta nuestro catálogo completo: pepitos de 30cm, 50cm y 1 metro, hamburguesas, papas monstruo, ensaladas y bebidas."
+>
+
+  <div class="max-w-6xl mx-auto w-full px-3 md:px-6 py-6">
+    <ProductCatalog 
+      products={INITIAL_PRODUCTS} 
+      categories={INITIAL_CATEGORIES} 
+      client:load 
+    />
+  </div>
+</BaseLayout>

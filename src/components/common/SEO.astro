@@ -1,0 +1,80 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  image?: string;
+}
+
+const {
+  title = "Pepitos House 251 | Auténtico Sabor Guaro en Barcelona, Lechería y PLC",
+  description = "Los mejores pepitos guaros de 30cm, 50cm y 1 metro con lomito, pecorino y salsas caseras. Delivery en Barcelona, Lechería y Puerto La Cruz, Anzoátegui. ¡Pide online por WhatsApp!",
+  canonicalUrl = "https://pepitoshouse251.com",
+  image = "/og-cover.jpg"
+} = Astro.props;
+
+const restaurantSchema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Pepitos House 251",
+  "image": image,
+  "description": description,
+  "servesCuisine": ["Venezuelan", "Fast Food", "Pepitos"],
+  "priceRange": "$$",
+  "telephone": "+584248319602",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Barcelona",
+    "addressRegion": "Anzoátegui",
+    "addressCountry": "VE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 10.1362,
+    "longitude": -64.6862
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Thursday", "Friday", "Saturday", "Sunday", "Monday"],
+      "opens": "15:00",
+      "closes": "22:00"
+    }
+  ],
+  "areaServed": ["Barcelona", "Lechería", "Puerto La Cruz"]
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- GEO Meta Tags -->
+<meta name="geo.region" content="VE-B" />
+<meta name="geo.placename" content="Barcelona, Estado Anzoátegui, Venezuela" />
+<meta name="geo.position" content="10.1362;-64.6862" />
+<meta name="ICBM" content="10.1362, -64.6862" />
+
+<!-- Open Graph / Facebook / WhatsApp -->
+<meta property="og:type" content="restaurant.restaurant" />
+<meta property="og:site_name" content="Pepitos House 251" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:locale" content="es_VE" />
+
+<!-- Restaurant specific data -->
+<meta property="restaurant:contact_info:locality" content="Barcelona" />
+<meta property="restaurant:contact_info:region" content="Anzoátegui" />
+<meta property="restaurant:contact_info:country_name" content="Venezuela" />
+<meta property="restaurant:contact_info:phone_number" content="+584248319602" />
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(restaurantSchema)} />

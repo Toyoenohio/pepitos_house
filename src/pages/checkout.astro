@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CheckoutForm from '../components/checkout/CheckoutForm';
+---
+
+<BaseLayout 
+  title="Checkout | Pepitos House 251"
+  description="Completa tu orden y envíala directo a WdatsApp para preparación inmediata."
+>
+  <div class="max-w-6xl mx-auto w-full px-3 md:px-6 py-8">
+    <!-- Top Title -->
+    <div class="border-b-2 border-black pb-yl-4 pb-4 mb-6">
+      <span class="inline-block bg-white text-black text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-black mb-2 shadow-brutal uppercase">
+        💦 Checkout Seguro ‒ Pedido Directo
+      </span>
+      <h1 class="font-display font-black text-3xl md:text-4xl uppercase tracking-tight">
+        Finalizar Pedido Guaro
+      </h1>
+    </div>
+
+    <CheckoutForm client:load />
+  </div>
+</BaseLayout>
