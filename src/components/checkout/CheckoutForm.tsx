@@ -5,9 +5,10 @@ import { checkRestaurantOpen } from '../../lib/availability';
 import { generateWhatsAppUrl, type CustomerData } from '../../lib/whatsapp';
 
 export default function CheckoutForm() {
+  const [mounted, setMounted] = useState(false);
   const cart = useStore($cart);
   const subtotal = useStore($cartSubtotal);
-  const items = Object.values(cart).filter(Boolean);
+  const items = mounted ? Object.values(cart).filter(Boolean) : [];
 
   const [schedule, setSchedule] = useState(checkRestaurantOpen());
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,6 +27,7 @@ export default function CheckoutForm() {
   });
 
   useEffect(() => {
+    setMounted(true);
     setSchedule(checkRestaurantOpen());
     // Load saved email or data from localStorage if available
     try {
@@ -114,11 +116,11 @@ export default function CheckoutForm() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-2l| mx-auto text-center py-16 p-8 bg-white rounded-3xl border-4 border-black shadow-brutal-lg">
-        <div className="text-6xl mb-4">👶</div>
-        <h2 className="font-display font-black text-2xl uppercase">TU Bolsa Está Limpiaecita</h2>
+      <div className="max-w-2xl mx-auto text-center py-16 p-8 bg-white rounded-3xl border-4 border-black shadow-brutal-lg">
+        <div className="text-6xl mb-4">🛒</div>
+        <h2 className="font-display font-black text-2xl uppercase">Tu Bolsa Está Vacía</h2>
         <p className="text-sm text-gray-600 mt-2 max-w-sm mx-auto">
-          Parace que aún no has elegido tu pepito guaro. ¡Va al menú y agrégalo en un solo click!
+          Parece que aún no has elegido tu pepito guaro. ¡Ve al menú y agrégalo en un solo click!
         </p>
         <a 
           href="/menu" 
@@ -143,9 +145,9 @@ export default function CheckoutForm() {
           {!schedule.isOpen && (
             <div className="bg-red-500 text-white p-5 rounded-2xl border-4 border-black shadow-brutal space-y-2">
               <div className="flex items-center gap-3">
-                <span className="text-3xl">�🔛</span>
+                <span className="text-3xl">⏰</span>
                 <div>
-                  <h3 className="font-display font-black text-lg uppercase">Local Cerrado al Mástro Guaro</h3>
+                  <h3 className="font-display font-black text-lg uppercase">Local Cerrado por Hoy</h3>
                   <p className="text-xs">{schedule.message}</p>
                 </div>
               </div>
@@ -156,7 +158,7 @@ export default function CheckoutForm() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="bg-white p-xl-6 p-5 sm:p-8 rounded-3xl border-4 border-black shadow-brutal-space-y-6">
+          <form onSubmit={handleSubmit} className="bg-white p-5 sm:p-8 rounded-3xl border-4 border-black shadow-brutal space-y-6">
             
             {/* Step 1: Contact */}
             <div className="space-y-3">
@@ -181,7 +183,7 @@ export default function CheckoutForm() {
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-black uppercase tracking-wider mb-1">Téléfono (WhatsApp) *</label>
+                  <label className="block text-[11px] font-black uppercase tracking-wider mb-1">Teléfono (WhatsApp) *</label>
                   <input 
                     type="tel" 
                     name="phone" 
@@ -235,7 +237,7 @@ export default function CheckoutForm() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-black uppercase tracking-wider mb-1">Dirección Exacta (Calle, Edificio/Casa, N* de apto) *</label>
+                <label className="block text-[11px] font-black uppercase tracking-wider mb-1">Dirección Exacta (Calle, Edificio/Casa, N° de apto) *</label>
                 <input 
                   type="text" 
                   name="address" 
@@ -330,17 +332,17 @@ export default function CheckoutForm() {
                     </span>
                   </>
                 ) : (
-                  <span>LOCAL CERRADO ( JORDADE 3PM-10PM)</span>
+                  <span>LOCAL CERRADO (JORNADA 3:00 PM - 10:00 PM)</span>
                 )}
               </button>
               <p className="text-[10px] text-center font-bold text-gray-500 uppercase tracking-widest mt-2">
-                ✄ Tu reserva se enviará directo a quien arma tu pepito
+                📦 Tu pedido se enviará directo a WhatsApp para armarlo de una vez
               </p>
             </div>
           </form>
         </div>
 
-        {/* RIGHTN COLUMN: Sticky Order Summary (lg:col-span-5) */}
+        {/* RIGHT COLUMN: Sticky Order Summary (lg:col-span-5) */}
         <div className="lg:col-span-5">
           <div className="sticky top-40 bg-white rounded-3xl border-4 border-black shadow-brutal overflow-hidden">
             <div className="bg-brandYellow border-b-2 border-black p-4 flex items-center justify-between">
@@ -378,7 +380,6 @@ export default function CheckoutForm() {
               })}
             </div>
 
-
             <div className="p-5 bg-white border-t-2 border-black space-y-2">
               <div className="flex justify-between text-xs font-bold text-gray-600">
                 <span>Subtotal</span>
@@ -391,11 +392,11 @@ export default function CheckoutForm() {
 
               <div className="flex justify-between text-xl font-display font-black text-black pt-3 border-t border-black/20">
                 <span>TOTAL:</span>
-                <span text-brandBlue>${subtotal.toFixed(2)}</span>
+                <span className="text-brandBlue font-black">${subtotal.toFixed(2)}</span>
               </div>
 
               <div className="mt-4 bg-brandYellow/50 p-3 rounded-xl border-2 border-black flex items-center gap-2.5">
-                <span className="text-2xl">п🎂</span>
+                <span className="text-2xl">🎟️</span>
                 <div className="text-[10px] font-bold leading-tight">
                   ¡Este pedido sumará 1 sello en tu tarjeta de membresía con el correo indicado!
                 </div>

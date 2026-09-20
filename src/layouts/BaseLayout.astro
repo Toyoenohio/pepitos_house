@@ -17,51 +17,50 @@ const { title, description } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <SEO title={title} description={description} />
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-black selection:text-white">
 
-  <!-- Anouncement Marquee Bar -->
-<aside aria-label="Anuncios de entrega" class="bg-black text-white text-xs md:text-sm font-bold uppercase tracking-widest py-1.5 overflow-hidden border-b-2 border-black sticky top-0 z-50">
-  <div class="animate-marquee flex items-center gap-8">
-    <span>🔵 DELIVERY EN BARCELONA, LECHERÍA & PUERTO LA CRUZ ​ P ​ P ​ P ​  PEDIDOS AL WHATSAPP 🔵</span>
-    <span>(🝐 EL AUTÁNTICO PEPITO GUARO DE HASTA 1 METRO ​ P ​ ‑100% ternera y pecorino 🝐</span>
-    <span>💦 PAGO MÓVIL � TASA BCV ‒ ZELLE ‒ EFECTIVO USD 💶</span>
-    <span>🔵 HORARIO: JUEVES A  LUNES DE 3:00 PM A 10:00 PM 🔵</span>
-    <span>(🝐 TARJETA DE SELL_OS: 10 SELL_OS = 1 PEPITO GRATIS </span>
-  </div>
-</aside>
+  <!-- Announcement Marquee Bar -->
+  <aside aria-label="Anuncios de entrega" class="bg-black text-white text-xs md:text-sm font-bold uppercase tracking-widest py-1.5 overflow-hidden border-b-2 border-black sticky top-0 z-50">
+    <div class="animate-marquee flex items-center gap-8 whitespace-nowrap">
+      <span>🔵 DELIVERY EN BARCELONA, LECHERÍA & PUERTO LA CRUZ • PEDIDOS AL WHATSAPP 🔵</span>
+      <span>🔥 EL AUTÉNTICO PEPITO GUARO DE HASTA 1 METRO • 100% LOMITO Y PECORINO 🔥</span>
+      <span>💵 PAGO MÓVIL TASA BCV • ZELLE • EFECTIVO USD 💶</span>
+      <span>⏰ HORARIO: JUEVES A LUNES DE 3:00 PM A 10:00 PM ⏰</span>
+      <span>🎟️ TARJETA DE SELLOS: 10 SELLOS = 1 PEPITO GRATIS 🎟️</span>
+    </div>
+  </aside>
 
   <!-- Main Header -->
-  <header class="bg-brandYellow border-b-2 border-black px-4 py-3 sticky top-[31px] z-40">
+  <header class="bg-brandYellow border-b-2 border-black px-4 py-3 sticky top-[30px] z-40">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <a href="/" class="flex items-center gap-2 group">
         <div class="w-10 h-10 rounded-full bg-brandYellow border-2 border-black flex items-center justify-center shadow-brutal transform group-hover:rotate-6 transition-transform">
-          <span class="text-xl">👹</span>
+          <span class="text-xl">🌭</span>
         </div>
         <div class="flex flex-col text-left">
           <span class="font-display font-black text-lg md:text-xl tracking-tight leading-none uppercase">PEPITOS HOUSE 251</span>
-          <span class="text-[10px] font-bold uppercase tracking-widest text-black/70">Auténtico Sabor Guaro ​ P Anzoátegui</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-black/70">Auténtico Sabor Guaro • Anzoátegui</span>
         </div>
       </a>
-
 
       <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center gap-2 font-display font-extrabold text-xs uppercase">
         <a href="/" class="px-3.5 py-1.5 rounded-full border-2 border-black bg-white shadow-brutal hover:bg-black hover:text-white transition">Inicio</a>
         <a href="/menu" class="px-3.5 py-1.5 rounded-full border-2 border-black bg-white shadow-brutal hover:bg-black hover:text-white transition">Menú 251</a>
         <a href="/membresia" class="px-3.5 py-1.5 rounded-full border-2 border-black bg-white shadow-brutal hover:bg-black hover:text-white transition flex items-center gap-1">
-          <span>🞜</span> Tarjeta de Sellos
+          <span>🎟️</span> Tarjeta de Sellos
         </a>
         <a href="/checkout" class="px-3.5 py-1.5 rounded-full border-2 border-black bg-white shadow-brutal hover:bg-black hover:text-white transition">Checkout</a>
       </nav>
 
       <!-- Cart & Actions -->
       <div class="flex items-center gap-2">
-        <a href="/membresia" title="Tarjeta de Sellos" class="md:hidden p-2 rounded-full border-2 border-black bg-white shadow-brutal text-sm">
-          🞜
+        <a href="/membresia" title="Tarjeta de Sellos" class="md:hidden p-2 rounded-full border-2 border-black bg-white shadow-brutal text-sm flex items-center justify-center">
+          🎟️
         </a>
         <CartBadge client:load />
       </div>
@@ -69,19 +68,39 @@ const { title, description } = Astro.props;
   </header>
 
   <!-- Main Content -->
-  <main class="flex-grow">
+  <main class="flex-grow pb-16 md:pb-0">
     <slot />
   </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav aria-label="Navegación móvil" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t-2 border-black flex justify-around items-center py-2 px-1 shadow-brutal font-display font-black text-[10px] uppercase">
+    <a href="/" class="flex flex-col items-center gap-0.5 text-black hover:text-brandBlue">
+      <span class="text-base">🏠</span>
+      <span>Inicio</span>
+    </a>
+    <a href="/menu" class="flex flex-col items-center gap-0.5 text-black hover:text-brandBlue">
+      <span class="text-base">🌭</span>
+      <span>Menú</span>
+    </a>
+    <a href="/membresia" class="flex flex-col items-center gap-0.5 text-black hover:text-brandBlue">
+      <span class="text-base">🎟️</span>
+      <span>Sellos</span>
+    </a>
+    <button onclick="window.dispatchEvent(new CustomEvent('ph251_open_cart'))" class="flex flex-col items-center gap-0.5 text-black hover:text-brandBlue cursor-pointer">
+      <span class="text-base">🛒</span>
+      <span>Bolsa</span>
+    </button>
+  </nav>
 
   <!-- Persistent Cart Drawer -->
   <CartDrawer client:load />
 
   <!-- Footer -->
-  <footer class="bg-black text-white border-t-4 border-black mt-16 py-12 px-4">
+  <footer class="bg-black text-white border-t-4 border-black mt-16 py-12 px-4 mb-12 md:mb-0">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-xs">
       <div class="space-y-3">
         <div class="flex items-center gap-2">
-          <span class="text-2xl">п👹</span>
+          <span class="text-2xl">🌭</span>
           <span class="font-display font-black text-lg text-brandYellow uppercase">PEPITOS HOUSE 251</span>
         </div>
         <p class="text-gray-400 leading-relaxed">
@@ -103,19 +122,18 @@ const { title, description } = Astro.props;
 
       <div class="space-y-2">
         <h4 class="font-display font-black text-sm text-brandYellow uppercase tracking-wider">Horario Guaro</h4>
-        <p class="text-gray-200 font-bold">Jueves a Lunes: 3:00 PM ​ P 10:00 PM</p>
+        <p class="text-gray-200 font-bold">Jueves a Lunes: 3:00 PM - 10:00 PM</p>
         <p class="text-amber-400 font-bold">Martes y Miércoles: Cerrado </p>
         <p class="text-gray-400 pt-1">Pago Móvil BCV & Zelle & Efectivo USD.</p>
       </div>
-
 
       <div class="space-y-2">
         <h4 class="font-display font-black text-sm text-brandYellow uppercase tracking-wider">Navegación</h4>
         <div class="flex flex-col gap-1.5 text-gray-300 font-bold">
           <a href="/menu" class="hover:text-brandYellow">→ Menú 251</a>
-          <a href="/checkout" class="hover:text-brandYellow">↊ Checkout & Carrito</a>
+          <a href="/checkout" class="hover:text-brandYellow">→ Checkout & Carrito</a>
           <a href="/membresia" class="hover:text-brandYellow">→ Tarjeta de Sellos</a>
-          <a href="/admin" class="text-gray-500 hover:text-gray-400">↊ Panel Admin</a>
+          <a href="/admin" class="text-gray-500 hover:text-gray-400">→ Panel Admin</a>
         </div>
         <p class="text-gray-500 pt-3 text-[11px]">© 2026 Pepitos House 251 C.A.</p>
       </div>
@@ -123,3 +141,4 @@ const { title, description } = Astro.props;
   </footer>
 </body>
 </html>
+

@@ -43,20 +43,20 @@ export default function LoyaltyCard() {
           }
         } else {
           setMember(null);
-          setMessage('Aoun no tienes una tarjeta registrada. ¡Ingresa tus datos abajo para crearla gratis!');
+          setMessage('Aún no tienes una tarjeta registrada. ¡Ingresa tus datos abajo para crearla gratis!');
         }
       } else {
         setMember(null);
-        setMessage('Aoun no tienes una tarjeta registrada. ¡Ingresa tus datos abajo para crearla gratis!');
+        setMessage('Aún no tienes una tarjeta registrada. ¡Ingresa tus datos abajo para crearla gratis!');
       }
     } catch (err) {
       // Local fallback if DB not yet connected
       setMember({
         email,
-        name: localStorage.getItem('ph251_member_name') || 'Cliente Guago',
+        name: localStorage.getItem('ph251_member_name') || 'Cliente Guaro',
         phone: localStorage.getItem('ph251_member_phone') || '04xx',
-        currentStamps: 3,
-        totalStamps: 3,
+        currentStamps: 0,
+        totalStamps: 0,
         cardsCompleted: 0
       });
     } finally {
@@ -169,7 +169,7 @@ export default function LoyaltyCard() {
         </div>
 
         {/* Progress Bar & Status */}
-        <div className="space-y-2 border-t-2 border-black/p15 pt-4">
+        <div className="space-y-2 border-t-2 border-black/15 pt-4">
           <div className="w-full bg-white rounded-full border-2 border-black h-4 overflow-hidden p-0.5">
             <div 
               className="h-full bg-brandBlue rounded-full transition-all duration-500"
@@ -179,9 +179,9 @@ export default function LoyaltyCard() {
 
           <div className="flex items-center justify-between text-xs font-bold">
             {stampsCount >= 10 ? (
-              <span className="text-emerald-800 font-extrabold">🍉 ¡FELICIDADES! Ya tienes tu pepito gratis disponible.</span>
+              <span className="text-emerald-800 font-extrabold">🎉 ¡FELICIDADES! Ya tienes tu pepito gratis disponible.</span>
             ) : (
-              <span>⌝ Faltan { 10 - stampsCount } sellos para tu regalo guaro.</span>
+              <span>✨ Faltan { 10 - stampsCount } sellos para tu regalo guaro.</span>
             )}
             {member && <span className="text-black/70">Id: {member.email}</span>}
           </div>
@@ -193,7 +193,7 @@ export default function LoyaltyCard() {
         <div>
           <h3 className="font-display font-black text-xl uppercase">Consulta o Activa tu Pasaporte</h3>
           <p className="text-xs text-gray-600 mt-1">
-            Ingresa tu correo electrónico para ver tus sellos acuales o registrarte al momento.
+            Ingresa tu correo electrónico para ver tus sellos actuales o registrarte al momento.
           </p>
         </div>
 

@@ -135,7 +135,7 @@ export default function ProductModal({ product, onClose, onToast }: Props) {
 
         {/* Body */}
         <div className="p-5 overflow-y-auto space-y-4 font-sans">
-          <div className="flex justify-between items-first">
+          <div className="flex justify-between items-start">
             <div>
               <h2 className="font-display font-black text-2xl uppercase tracking-tight">{product.name}</h2>
               <div className="text-xs font-bold text-gray-600 mt-1">{product.stats}</div>

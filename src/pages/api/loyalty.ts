@@ -1,7 +1,10 @@
-﻿import type { APIRoute } from 'astro';
+import type { APIRoute } from 'astro';
 import { getDb } from '../../db/client';
 import { loyaltyMembers } from '../../db/schema';
 import { eq } from 'drizzle-orm';
+
+// In-memory fallback for local dev / before DB connection
+const localMembers = new Map<string, any>();
 
 export const GET: APIRoute = async (context) => {
   const email = context.url.searchParams.get('email');
@@ -9,25 +12,18 @@ export const GET: APIRoute = async (context) => {
     return new Response(JSON.stringify({ error: 'Email is required' }), { status: 400 });
   }
 
+  const clean = email.toLowerCase().trim();
   const ru = (context.locals as any)?.runtime;
   const dburl = ru?.env?.DATABASE_URL || process.env.DATABASE_URL;
   const db = getDb(dburl);
 
   if (!db) {
-    return new Response(JSON.stringify({
-      member: {
-        email,
-        name: 'Cliente Guaro',
-        phone: '0424-0000000',
-        currentStamps: 3,
-        totalStamps: 3,
-        cardsCompleted: 0
-      }
-    }), { status: 200 });
+    const existing = localMembers.get(clean);
+    return new Response(JSON.stringify({ member: existing || null }), { status: 200 });
   }
 
   try {
-    const rows = await db.select().from(loyaltyMembers).where(eq(loyaltyMembers.email, email.toLowerCase().trim()));
+    const rows = await db.select().from(loyaltyMembers).where(eq(loyaltyMembers.email, clean));
     if (rows.length > 0) {
       return new Response(JSON.stringify({ member: rows[0] }), { status: 200 });
     }
@@ -45,24 +41,29 @@ export const POST: APIRoute = async (context) => {
       return new Response(JSON.stringify({ error: 'Required' }), { status: 400 });
     }
 
+    const clean = email.toLowerCase().trim();
     const ru = (context.locals as any)?.runtime;
     const dburl = ru?.env?.DATABASE_URL || process.env.DATABASE_URL;
     const db = getDb(dburl);
 
     if (!db) {
-      return new Response(JSON.stringify({
-        member: {
-          email,
-          name,
-          phone: phone || 'N/A',
-          currentStamps: 1,
-          totalStamps: 1,
-          cardsCompleted: 0
-        }
-      }), { status: 200 });
+      const existing = localMembers.get(clean);
+      if (existing) {
+        return new Response(JSON.stringify({ member: existing }), { status: 200 });
+      }
+
+      const newMember = {
+        email: clean,
+        name,
+        phone: phone || 'N/A',
+        currentStamps: 0,
+        totalStamps: 0,
+        cardsCompleted: 0
+      };
+      localMembers.set(clean, newMember);
+      return new Response(JSON.stringify({ member: newMember }), { status: 201 });
     }
 
-    const clean = email.toLowerCase().trim();
     const res = await db.select().from(loyaltyMembers).where(eq(loyaltyMembers.email, clean));
     if (res.length > 0) {
       return new Response(JSON.stringify({ member: res[0] }), { status: 200 });
@@ -72,8 +73,8 @@ export const POST: APIRoute = async (context) => {
       email: clean,
       name,
       phone: phone || 'N/A',
-      currentStamps: 1,
-      totalStamps: 1,
+      currentStamps: 0,
+      totalStamps: 0,
       cardsCompleted: 0
     }).returning();
 
@@ -82,3 +83,4 @@ export const POST: APIRoute = async (context) => {
     return new Response(JSON.stringify({ error: 'Error' }), { status: 500 });
   }
 };
+
