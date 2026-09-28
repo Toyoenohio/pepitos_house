@@ -19,6 +19,15 @@ export default defineConfig({
   }),
   integrations: [react()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        // El runtime de Cloudflare Workers no expone `MessageChannel`, y el build
+        // por defecto de react-dom/server (`.browser`) lo necesita para el
+        // scheduler → el deploy falla con "MessageChannel is not defined".
+        // `.edge` es el build pensado para runtimes de edge/Workers.
+        'react-dom/server': 'react-dom/server.edge'
+      }
+    }
   }
 });
