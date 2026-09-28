@@ -3,7 +3,18 @@ import { drizzle } from 'drizzle-orm/neon-http';
 import * as schema from './schema.ts';
 import { INITIAL_CATEGORIES, INITIAL_PRODUCTS, CATEGORY_MODIFIERS } from '../lib/productsData.ts';
 
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_SXOlNg8Kre9T@ep-winter-rice-aeevvwyq-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require';
+const DATABASE_URL_RAW = process.env.DATABASE_URL;
+
+// ⚠️ NUNCA poner el connection string por defecto acá: este repo es público y
+// el valor quedaría en el historial de git para siempre. Se pasa por entorno.
+//   cp .env.example .env.local  →  completar DATABASE_URL
+//   DATABASE_URL='postgresql://...' npm run db:seed
+if (!DATABASE_URL_RAW) {
+  console.error('Falta DATABASE_URL. Copiá .env.example a .env.local y completá el connection string de Neon.');
+  process.exit(1);
+}
+// Ya validado arriba: TS necesita el estrechamiento explícito.
+const DATABASE_URL: string = DATABASE_URL_RAW;
 
 async function seed() {
   console.log('🌱 Conectando a Neon Postgres...');

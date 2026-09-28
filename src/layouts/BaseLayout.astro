@@ -7,9 +7,11 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  /** true en el panel admin: no se indexa. */
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +21,7 @@ const { title, description } = Astro.props;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <SEO title={title} description={description} />
+  <SEO title={title} description={description} noindex={noindex} />
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-black selection:text-white">
 
@@ -133,7 +135,6 @@ const { title, description } = Astro.props;
           <a href="/menu" class="hover:text-brandYellow">→ Menú 251</a>
           <a href="/checkout" class="hover:text-brandYellow">→ Checkout & Carrito</a>
           <a href="/membresia" class="hover:text-brandYellow">→ Tarjeta de Sellos</a>
-          <a href="/admin" class="text-gray-500 hover:text-gray-400">→ Panel Admin</a>
         </div>
         <p class="text-gray-500 pt-3 text-[11px]">© 2026 Pepitos House 251 C.A.</p>
       </div>

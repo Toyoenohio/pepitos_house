@@ -1,32 +1,33 @@
 import React, { useState, useMemo } from 'react';
-import { useStore } from '@nanostores/react';
 import type { MenuItem, Category } from '../../lib/productsData';
 import { addItemToCart } from '../../stores/cartStore';
-import { $productOverrides, getEffectiveProduct } from '../../stores/availabilityStore';
 import { isItemAvailableToday } from '../../lib/availability';
 import ProductModal from './ProductModal';
 
 interface Props {
   products: MenuItem[];
   categories: Category[];
+  /**
+   * Nivel del encabezado del catálogo. En la home el H1 es el del hero, así que
+   * acá va h2 (dos H1 en una página confunden a Google y a los lectores de
+   * pantalla). En /menu es la única sección, así que es el H1 de la página.
+   */
+  headingLevel?: 'h1' | 'h2';
 }
-
-export default function ProductCatalog({ products, categories }: Props) {
+export default function ProductCatalog({ products, categories, headingLevel = 'h2' }: Props) {
+  const Heading = headingLevel;
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<MenuItem | null>(null);
   const [toastMessage, setToastMessage] = useState<string>('');
-  const overrides = useStore($productOverrides);
-
   function showToast(msg: string) {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(''), 2800);
   }
 
-  // Merge products with real-time admin availability overrides
-  const effectiveProducts = useMemo(() => {
-    return products.map(p => getEffectiveProduct(p, overrides));
-  }, [products, overrides]);
+  // Los productos ya llegan con la disponibilidad aplicada desde el servidor
+  // (index.astro / menu.astro leen Neon). El navegador no decide qué está disponible.
+  const effectiveProducts = products;
 
   const filteredProducts = useMemo(() => {
     return effectiveProducts.filter(p => {
@@ -72,9 +73,9 @@ export default function ProductCatalog({ products, categories }: Props) {
           <span className="inline-block bg-white text-black text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-black mb-2 shadow-brutal uppercase tracking-wider">
             🔵 Auténtico Sabor Guaro en Anzoátegui
           </span>
-          <h1 className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
+          <Heading className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
             Menú 251
-          </h1>
+          </Heading>
         </div>
         <div className="text-sm font-semibold text-black/80 max-w-md">
           Especialistas en pepitos guaros monumentales, carne tierna a la plancha, queso pecorino y salsas caseras. Delivery en Barcelona, Lechería y Puerto La Cruz.

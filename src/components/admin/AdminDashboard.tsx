@@ -8,10 +8,13 @@ import {
   getEffectiveProduct 
 } from '../../stores/availabilityStore';
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ initialOverrides = {} }: { initialOverrides?: Record<string, { isAvailable: boolean; availableDays: string[] }> }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checking, setChecking] = useState(true);
   const [passwordInput, setPasswordInput] = useState('');
   const [authError, setAuthError] = useState('');
+  const [syncError, setSyncError] = useState('');
+  const [busy, setBusy] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   const overrides = useStore($productOverrides);
@@ -45,28 +48,69 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     setMounted(true);
-    const auth = sessionStorage.getItem('ph251_admin_auth');
-    if (auth === 'true') {
-      setIsAuthenticated(true);
-    }
+    // La sesión vive en una cookie HttpOnly firmada por el servidor: el navegador
+    // no puede leerla ni falsificarla, y la contraseña ya no viaja en el bundle.
+    $productOverrides.set(initialOverrides || {});
+    fetch('/api/admin/session', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((d) => {
+        setIsAuthenticated(!!d?.authenticated);
+        if (!d?.configured) setAuthError('El panel no está configurado: falta ADMIN_PASSWORD en el entorno.');
+      })
+      .catch(() => {})
+      .finally(() => setChecking(false));
   }, []);
 
-  function handleLogin(e: React.FormEvent) {
+  // La contraseña se valida en el servidor contra ADMIN_PASSWORD del entorno.
+  // Acá ya no hay ninguna clave: antes estaba escrita en este archivo, que se
+  // compila y se sirve al navegador (y el repo es público).
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    // Default admin password or environment match
-    if (passwordInput === 'pepitos251admin') {
-      sessionStorage.setItem('ph251_admin_auth', 'true');
+    setBusy(true);
+    setAuthError('');
+    try {
+      const r = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: passwordInput }),
+      });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d?.error || 'No se pudo entrar.');
       setIsAuthenticated(true);
-      setAuthError('');
-    } else {
-      setAuthError('Contraseña incorrecta. Inténtalo nuevamente.');
+      setPasswordInput('');
+      $productOverrides.set(initialOverrides || {});
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : 'Contraseña incorrecta. Inténtalo nuevamente.');
+    } finally {
+      setBusy(false);
     }
   }
 
-  function handleLogout() {
-    sessionStorage.removeItem('ph251_admin_auth');
+  async function handleLogout() {
+    try { await fetch('/api/admin/logout', { method: 'POST' }); } catch { /* sin sesión igual se sale */ }
     setIsAuthenticated(false);
     setPasswordInput('');
+  }
+
+  /** Manda el cambio al servidor (Neon). Antes solo se guardaba en este navegador,
+   *  así que el cliente creía que había apagado un plato y los visitantes seguían
+   *  viéndolo disponible. Si el guardado falla, se avisa: no se puede mentir.
+   */
+  async function persistOverride(productId: string) {
+    const o = $productOverrides.get()[productId];
+    if (!o) return;
+    setSyncError('');
+    try {
+      const r = await fetch('/api/admin/availability', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: productId, isAvailable: o.isAvailable, availableDays: o.availableDays }),
+      });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) setSyncError(d?.error || 'No se pudo guardar el cambio.');
+    } catch {
+      setSyncError('Sin conexión: el cambio no se guardó en el servidor.');
+    }
   }
 
   function handleCreateItem(e: React.FormEvent) {
@@ -122,6 +166,13 @@ export default function AdminDashboard() {
 
   // Auth Gate Screen
   if (!isAuthenticated) {
+    if (checking) {
+      return (
+        <div className="flex items-center justify-center py-24 text-black font-display font-black uppercase animate-pulse">
+          Verificando sesión…
+        </div>
+      );
+    }
     return (
       <div className="max-w-md mx-auto my-12 p-8 bg-white rounded-3xl border-4 border-black shadow-brutal-lg space-y-6">
         <div className="text-center space-y-2">
@@ -153,9 +204,10 @@ export default function AdminDashboard() {
 
           <button 
             type="submit"
-            className="w-full bg-brandYellow hover:bg-black hover:text-white transition text-black font-display font-black py-3 rounded-full border-2 border-black shadow-brutal uppercase text-sm cursor-pointer"
+            disabled={busy}
+            className="w-full bg-brandYellow hover:bg-black hover:text-white transition text-black font-display font-black py-3 rounded-full border-2 border-black shadow-brutal uppercase text-sm cursor-pointer disabled:opacity-60"
           >
-            Entrar al Panel
+            {busy ? "Entrando…" : "Entrar al Panel"}
           </button>
         </form>
       </div>
@@ -195,6 +247,12 @@ export default function AdminDashboard() {
           </button>
         </div>
       </div>
+
+      {syncError && (
+        <div role="alert" className="bg-red-100 border-2 border-red-600 text-red-800 font-display font-black text-xs px-4 py-3 rounded-2xl uppercase">
+          ⚠️ {syncError} — el cambio no se guardó en el servidor.
+        </div>
+      )}
 
       {/* Stats Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -266,7 +324,7 @@ export default function AdminDashboard() {
                       <button
                         key={k}
                         type="button"
-                        onClick={() => toggleProductDay(prod.id, k)}
+                        onClick={() => { toggleProductDay(prod.id, k); persistOverride(prod.id); }}
                         title={`Activar/Desactivar día ${l}`}
                         className={`aspect-square w-7 h-7 rounded-full border-2 border-black font-display font-black text-[11px] transition cursor-pointer ${hasDay ? 'bg-brandYellow text-black' : 'bg-white text-gray-400'}`}
                       >
@@ -279,7 +337,7 @@ export default function AdminDashboard() {
                 {/* Switch 86d Toggle */}
                 <button 
                   type="button"
-                  onClick={() => toggleProduct86(prod.id, prod.isAvailable)}
+                  onClick={() => { toggleProduct86(prod.id, prod.isAvailable); persistOverride(prod.id); }}
                   className={`px-3.5 py-1.5 rounded-full border-2 border-black font-display font-black text-xs uppercase shadow-brutal transition cursor-pointer ${prod.isAvailable ? 'bg-emerald-500 text-white hover:bg-emerald-600' : 'bg-red-600 text-white hover:bg-red-700'}`}
                 >
                   {prod.isAvailable ? '🟢 ACTIVO' : '⛔ APAGADO (86)'}

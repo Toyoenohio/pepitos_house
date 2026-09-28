@@ -2,6 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from '../lib/productsData';
 import ProductCatalog from '../components/menu/ProductCatalog';
+import { loadOverrides, applyOverrides } from '../lib/overrides';
+
+// La disponibilidad (86 / días activos) la gestiona el panel y vive en Neon.
+// Si la base no responde, loadOverrides devuelve {} y se usa el catálogo tal cual.
+const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.locals));
 ---
 
 <BaseLayout 
@@ -117,7 +122,7 @@ import ProductCatalog from '../components/menu/ProductCatalog';
     <!-- Menu Preview / Interactive Catalog -->
     <section id="menu-catalog" class="pt-6">
       <ProductCatalog 
-        products={INITIAL_PRODUCTS} 
+        products={products} 
         categories={INITIAL_CATEGORIES} 
         client:load 
       />

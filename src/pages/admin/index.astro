@@ -1,13 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdminDashboard from '../../components/admin/AdminDashboard';
+import { loadOverrides } from '../../lib/overrides';
+
+// El panel arranca mostrando el estado real de la base (no el que quedó en el
+// navegador de quien lo abra).
+const overrides = await loadOverrides(Astro.locals);
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Panel Administrativo | Pepitos House 251"
   description="Gestión de platos, disponibilidad y horario de Pepitos House 251."
+  noindex={true}
 >
   <div class="max-w-6xl mx-auto w-full px-3 md:px-6 py-8">
-    <AdminDashboard client:load />
+    <AdminDashboard initialOverrides={overrides} client:load />
   </div>
 </BaseLayout>
