@@ -2,6 +2,7 @@
 import { getDb } from '../../db/client';
 import { orders, loyaltyMembers, loyaltyStamps } from '../../db/schema';
 import { eq } from 'drizzle-orm';
+import { runtimeEnv } from '../../lib/env';
 import { INITIAL_PRODUCTS, CATEGORY_MODIFIERS, type MenuItem, type ProductGroup } from '../../lib/productsData';
 
 export const prerender = false;
@@ -55,8 +56,7 @@ const str = (v: unknown, max: number) => String(v ?? '').trim().slice(0, max);
 const num = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : NaN);
 
 export const POST: APIRoute = async (context) => {
-  const ru = (context.locals as any)?.runtime;
-  const env = ru?.env || (typeof process !== 'undefined' ? process.env : {}) || {};
+  const env = runtimeEnv(context.locals);
 
   let body: any;
   try {

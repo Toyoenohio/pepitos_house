@@ -11,6 +11,8 @@
  * en Node, sin imports de node:*.
  */
 
+import { runtimeEnv } from './env';
+
 export const ADMIN_COOKIE = 'ph251_admin';
 
 /** Cuánto dura la sesión (segundos). */
@@ -87,11 +89,9 @@ export async function verifyToken(token: string | undefined | null, env: Record<
   return safeEqual(sig, expected);
 }
 
-/** Env del runtime (Cloudflare) o process.env como fallback en local. */
-export function runtimeEnv(locals: any): Record<string, any> {
-  const ru = locals?.runtime?.env;
-  return ru || (typeof process !== 'undefined' ? process.env : {}) || {};
-}
+// `runtimeEnv` se movió a ./env para que la lógica de lectura sea una sola
+// (runtime.env de Cloudflare + process.env de local, combinados).
+export { runtimeEnv };
 
 export const cookieOptions = {
   httpOnly: true,

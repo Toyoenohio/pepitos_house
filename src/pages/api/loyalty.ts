@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { getDb } from '../../db/client';
 import { loyaltyMembers } from '../../db/schema';
 import { eq } from 'drizzle-orm';
+import { runtimeEnv } from '../../lib/env';
 
 export const prerender = false;
 
@@ -39,8 +40,7 @@ export const GET: APIRoute = async (context) => {
     return Response.json({ error: 'Email inválido.' }, { status: 400 });
   }
 
-  const ru = (context.locals as any)?.runtime;
-  const env = ru?.env || (typeof process !== 'undefined' ? process.env : {}) || {};
+  const env = runtimeEnv(context.locals);
   const db = getDb(env?.DATABASE_URL);
 
   if (!db) {
@@ -72,8 +72,7 @@ export const POST: APIRoute = async (context) => {
     return Response.json({ error: 'Email y nombre son obligatorios.' }, { status: 400 });
   }
 
-  const ru = (context.locals as any)?.runtime;
-  const env = ru?.env || (typeof process !== 'undefined' ? process.env : {}) || {};
+  const env = runtimeEnv(context.locals);
   const db = getDb(env?.DATABASE_URL);
 
   if (!db) {

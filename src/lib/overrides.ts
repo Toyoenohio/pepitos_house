@@ -11,6 +11,7 @@
  */
 import { getDb } from '../db/client';
 import { menuItems } from '../db/schema';
+import { runtimeEnv } from './env';
 import { INITIAL_PRODUCTS, type MenuItem } from './productsData';
 
 export interface ProductOverride {
@@ -22,8 +23,7 @@ export type OverrideMap = Record<string, ProductOverride>;
 
 /** Lee los overrides desde Neon. Nunca lanza: degrada a `{}`. */
 export async function loadOverrides(locals: any): Promise<OverrideMap> {
-  const ru = locals?.runtime;
-  const env = ru?.env || (typeof process !== 'undefined' ? process.env : {});
+  const env = runtimeEnv(locals);
   const db = getDb(env?.DATABASE_URL);
   if (!db) return {};
   try {
