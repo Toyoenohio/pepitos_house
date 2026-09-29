@@ -54,7 +54,7 @@ export default function AdminDashboard({
     price: 10.00,
     badgeType: 'Especial',
     highlight: 'NUEVO',
-    stats: '🌭 30cm • Lomito',
+    stats: '30cm • Lomito',
     description: '',
     dressing: 'Salsa tártara de la casa',
     image: 'https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80',
@@ -147,10 +147,10 @@ export default function AdminDashboard({
       setStoreMessage(data.message);
       setStatusFeedback(
         newMode === 'open' 
-          ? '🟢 ¡Local marcado como ABIERTO! Se aceptan pedidos sin importar el horario.' 
+          ? '¡Local marcado como ABIERTO! Se aceptan pedidos sin importar el horario.' 
           : newMode === 'closed' 
-          ? '⛔ ¡Local CERRADO! Los pedidos web han sido bloqueados en el checkout.' 
-          : '⏰ Modo AUTOMÁTICO activo (según horario de Jueves a Lunes 3pm - 10pm).'
+          ? '¡Local CERRADO! Los pedidos web han sido bloqueados en el checkout.' 
+          : 'Modo AUTOMÁTICO activo (según horario de Jueves a Lunes 3pm - 10pm).'
       );
       setTimeout(() => setStatusFeedback(''), 5000);
     } catch (err: any) {
@@ -171,7 +171,7 @@ export default function AdminDashboard({
       price: Number(newItemForm.price) || 10.00,
       badgeType: newItemForm.badgeType || 'Clásico',
       highlight: newItemForm.highlight || 'RECOMENDADO',
-      stats: newItemForm.stats || '🌭 30cm • Lomito',
+      stats: newItemForm.stats || '30cm • Lomito',
       description: newItemForm.description!,
       dressing: newItemForm.dressing || 'Salsa tártara de la casa',
       image: newItemForm.image || 'https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80',
@@ -193,7 +193,7 @@ export default function AdminDashboard({
       price: 10.00,
       badgeType: 'Especial',
       highlight: 'NUEVO',
-      stats: '🌭 30cm • Lomito',
+      stats: '30cm • Lomito',
       description: '',
       dressing: 'Salsa tártara de la casa',
       image: 'https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80',
@@ -223,7 +223,7 @@ export default function AdminDashboard({
     return (
       <div className="max-w-md mx-auto my-12 p-8 bg-white rounded-3xl border-4 border-black shadow-brutal-lg space-y-6">
         <div className="text-center space-y-2">
-          <span className="text-4xl">🔒</span>
+          <span className="text-4xl"></span>
           <h2 className="font-display font-black text-2xl uppercase">Acceso Administrativo</h2>
           <p className="text-xs text-gray-600 font-semibold">
             Ingresa la contraseña de administración para gestionar el catálogo y la disponibilidad de Pepitos House 251.
@@ -245,7 +245,7 @@ export default function AdminDashboard({
 
           {authError && (
             <div className="p-2.5 bg-red-100 border-2 border-red-600 text-red-800 text-xs font-bold rounded-xl">
-              ⚠️ {authError}
+              ️ {authError}
             </div>
           )}
 
@@ -271,7 +271,7 @@ export default function AdminDashboard({
       <div className="bg-black text-white p-6 rounded-3xl border-4 border-black shadow-brutal flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="text-2xl">🌭</span>
+            <span className="text-2xl"></span>
             <h1 className="font-display font-black text-2xl uppercase">Panel Administrativo 251</h1>
           </div>
           <p className="text-xs text-gray-400 mt-1">
@@ -297,7 +297,7 @@ export default function AdminDashboard({
 
       {syncError && (
         <div role="alert" className="bg-red-100 border-2 border-red-600 text-red-800 font-display font-black text-xs px-4 py-3 rounded-2xl uppercase">
-          ⚠️ {syncError} — el cambio no se guardó en el servidor.
+          ️ {syncError} — el cambio no se guardó en el servidor.
         </div>
       )}
 
@@ -308,7 +308,7 @@ export default function AdminDashboard({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-2xl">{isStoreOpen ? '🟢' : '⛔'}</span>
+              <span className="text-2xl">{isStoreOpen ? '' : ''}</span>
               <h2 className="font-display font-black text-xl uppercase tracking-tight">
                 Estado del Local para Pedidos
               </h2>
@@ -339,7 +339,7 @@ export default function AdminDashboard({
                   : 'bg-white text-black hover:bg-emerald-100'
               }`}
             >
-              <span>🟢 ABRIR AHORA</span>
+              <span>ABRIR AHORA</span>
             </button>
 
             <button
@@ -353,7 +353,7 @@ export default function AdminDashboard({
                   : 'bg-white text-black hover:bg-red-100'
               }`}
             >
-              <span>⛔ CERRAR AHORA</span>
+              <span>CERRAR AHORA</span>
             </button>
 
             <button
@@ -367,7 +367,7 @@ export default function AdminDashboard({
                   : 'bg-white text-black hover:bg-blue-100'
               }`}
             >
-              <span>⏰ AUTOMÁTICO (HORARIO)</span>
+              <span>AUTOMÁTICO (HORARIO)</span>
             </button>
           </div>
         </div>
@@ -412,7 +412,7 @@ export default function AdminDashboard({
               : 'bg-white text-gray-700 hover:bg-gray-100'
           }`}
         >
-          <span className="text-base">📦</span>
+          <span className="text-base"></span>
           <span>Control de Pedidos & Despacho</span>
         </button>
 
@@ -425,7 +425,7 @@ export default function AdminDashboard({
               : 'bg-white text-gray-700 hover:bg-gray-100'
           }`}
         >
-          <span className="text-base">🌭</span>
+          <span className="text-base"></span>
           <span>Catálogo & Disponibilidad (86)</span>
         </button>
       </div>
@@ -522,7 +522,7 @@ export default function AdminDashboard({
                   onClick={() => { toggleProduct86(prod.id, prod.isAvailable); persistOverride(prod.id); }}
                   className={`px-3.5 py-1.5 rounded-full border-2 border-black font-display font-black text-xs uppercase shadow-brutal transition cursor-pointer ${prod.isAvailable ? 'bg-emerald-500 text-white hover:bg-emerald-600' : 'bg-red-600 text-white hover:bg-red-700'}`}
                 >
-                  {prod.isAvailable ? '🟢 ACTIVO' : '⛔ APAGADO (86)'}
+                  {prod.isAvailable ? 'ACTIVO' : 'APAGADO (86)'}
                 </button>
               </div>
             </div>

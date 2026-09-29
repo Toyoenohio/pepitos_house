@@ -143,7 +143,6 @@ export default function CheckoutForm() {
   if (items.length === 0) {
     return (
       <div className="max-w-2xl mx-auto text-center py-16 p-8 bg-white rounded-3xl border-4 border-black shadow-brutal-lg">
-        <div className="text-6xl mb-4">🛒</div>
         <h2 className="font-display font-black text-2xl uppercase">Tu Bolsa Está Vacía</h2>
         <p className="text-sm text-gray-600 mt-2 max-w-sm mx-auto">
           Parece que aún no has elegido tu pepito guaro. ¡Ve al menú y agrégalo en un solo click!
@@ -152,7 +151,7 @@ export default function CheckoutForm() {
           href="/menu" 
           className="inline-block mt-6 bg-brandYellow hover:bg-black hover:text-white transition text-black font-display font-black px-6 py-3 rounded-full border-2 border-black shadow-brutal uppercase text-sm"
         >
-          🔵 Ver Menú 251
+          Ver Menú 251
         </a>
       </div>
     );
@@ -338,7 +337,7 @@ export default function CheckoutForm() {
 
             {errorMessage && (
               <div className="bg-red-100 border-2 border-red-600 text-red-800 p-3 rounded-xl text-xs font-bold">
-                ⚠️ {errorMessage}
+                {errorMessage}
               </div>
             )}
 
@@ -352,7 +351,7 @@ export default function CheckoutForm() {
               >
                 {schedule.isOpen ? (
                   <>
-                    <span>📲 ENVIAR PEDIDO AL WHATSAPP</span>
+                    <span>ENVIAR PEDIDO AL WHATSAPP</span>
                     <span className="bg-brandYellow text-black px-2.5 py-0.5 rounded-full border border-black text-sm">
                       ${subtotal.toFixed(2)}
                     </span>
@@ -362,7 +361,7 @@ export default function CheckoutForm() {
                 )}
               </button>
               <p className="text-[10px] text-center font-bold text-gray-500 uppercase tracking-widest mt-2">
-                📦 Tu pedido se enviará directo a WhatsApp para armarlo de una vez
+                Tu pedido se enviará directo a WhatsApp para armarlo de una vez
               </p>
             </div>
           </form>
@@ -385,7 +384,7 @@ export default function CheckoutForm() {
 
                 return (
                   <div key={item.id} className="bg-white p-3 rounded-xl border-2 border-black flex items-center gap-3">
-                    <img src={item.image} alt={item.name} className="w-12 h-12 rounded-full border-2 border-black object-cover flex-shrink-0" />
+                    <img src={item.image} alt={item.name} className="w-12 h-12 rounded-xl border-2 border-black object-cover flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <h4 className="font-display font-black text-xs uppercase truncate">{item.name}</h4>
                       <div className="text-[10px] text-gray-600 font-bold">
@@ -422,7 +421,6 @@ export default function CheckoutForm() {
               </div>
 
               <div className="mt-4 bg-brandYellow/50 p-3 rounded-xl border-2 border-black flex items-center gap-2.5">
-                <span className="text-2xl">🎟️</span>
                 <div className="text-[10px] font-bold leading-tight">
                   ¡Este pedido sumará 1 sello en tu tarjeta de membresía con el correo indicado!
                 </div>

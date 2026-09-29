@@ -110,7 +110,7 @@ export default function LoyaltyCard() {
       {/* Header */}
       <div className="text-center space-y-2">
         <div className="inline-block bg-white text-black text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-black shadow-brutal uppercase">
-          🞧 Club Guaro 251
+          Club Guaro 251
         </div>
         <h1 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight">
           Tarjeta de Sellos Digital
@@ -128,7 +128,6 @@ export default function LoyaltyCard() {
         {/* Card Top Bar */}
         <div className="flex items-center justify-between border-b-2 border-black pb-4 mb-6">
           <div className="flex items-center gap-2.5">
-            <span className="text-3xl">👶</span>
             <div>
               <h2 className="font-display font-black text-xl sm:text-2xl uppercase leading-none">PEPITOS HOUSE 251</h2>
               <span className="text-[10px] font-bold uppercase tracking-widest text-black/70">Pasaporte Guaro</span>
@@ -151,12 +150,12 @@ export default function LoyaltyCard() {
             >
               {earned ? (
                 <div className="transform -rotate-12 flex flex-col items-center">
-                  <span className="text-2xl sm:text-3xl">👹</span>
+                  <span className="text-2xl font-black">✓</span>
                   <span className="text-[8px] font-display font-black uppercase">SELLO</span>
                 </div>
             ) : index === 9 ? (
                 <div className="text-center">
-                  <span className="text-2xl">🍸</span>
+                  <span className="text-base font-black">10</span>
                   <span className="block text-[8px] font-black uppercase">GRATIS</span>
                 </div>
             ) : (
@@ -179,9 +178,9 @@ export default function LoyaltyCard() {
 
           <div className="flex items-center justify-between text-xs font-bold">
             {stampsCount >= 10 ? (
-              <span className="text-emerald-800 font-extrabold">🎉 ¡FELICIDADES! Ya tienes tu pepito gratis disponible.</span>
+              <span className="text-emerald-800 font-extrabold">¡FELICIDADES! Ya tienes tu pepito gratis disponible.</span>
             ) : (
-              <span>✨ Faltan { 10 - stampsCount } sellos para tu regalo guaro.</span>
+              <span>Faltan { 10 - stampsCount } sellos para tu regalo guaro.</span>
             )}
             {member && <span className="text-black/70">Id: {member.email}</span>}
           </div>

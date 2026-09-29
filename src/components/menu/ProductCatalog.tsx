@@ -71,7 +71,7 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-black pb-4">
         <div>
           <span className="inline-block bg-white text-black text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-black mb-2 shadow-brutal uppercase tracking-wider">
-            🔵 Auténtico Sabor Guaro en Anzoátegui
+            Auténtico Sabor Guaro en Anzoátegui
           </span>
           <Heading className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
             Menú 251
@@ -110,7 +110,6 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
             onClick={() => setSelectedCategory(cat.slug)}
             className={`px-5 py-2 rounded-full border-2 border-black font-display font-extrabold text-sm uppercase tracking-wide whitespace-nowrap shadow-brutal transition-all flex items-center gap-1.5 ${selectedCategory === cat.slug ? 'bg-black text-white' : 'bg-white text-black hover:bg-brandYellowDark'}`}
           >
-            <span>{cat.emoji}</span>
             {cat.name}
           </button>
         ))}
@@ -125,7 +124,6 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
         {filteredProducts.length === 0 ? (
           <div className="col-span-full text-center py-12 bg-white rounded-3xl border-4 border-black p-6 shadow-brutal">
-            <span className="text-4xl">🔍</span>
             <h3 className="font-display font-black text-xl uppercase mt-2">No encontramos ese producto</h3>
             <p className="text-xs text-gray-600 mt-1">Prueba buscando "pepito", "lomito", "queso" o "papas".</p>
             <button 
@@ -145,8 +143,8 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
                 className={`bg-white rounded-3xl border-3 border-black overflow-hidden shadow-brutal hover:shadow-brutal-lg transition-all flex flex-col justify-between ${!isAvailableNow ? 'opacity-80' : ''}`}
               >
                 {/* Top Media Block */}
-                <div className={`${product.bgAccent} p-5 relative border-b-2 border-black flex flex-col items-center justify-center`}>
-                  <div className="w-full flex items-center justify-between z-10">
+                <div className={`${product.bgAccent} p-4 relative border-b-2 border-black flex flex-col justify-between`}>
+                  <div className="w-full flex items-center justify-between mb-2.5 z-10">
                     <button 
                       onClick={() => setSelectedProduct(product)} 
                       className="text-[10px] font-display font-black px-2.5 py-1 rounded-full border border-black shadow-brutal uppercase tracking-wider flex items-center gap-1 bg-black text-white hover:bg-white hover:text-black cursor-pointer"
@@ -168,18 +166,16 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
                   </div>
 
                   <div 
-                    className="relative my-2 cursor-pointer group"
+                    className="relative w-full aspect-[4/3] rounded-2xl border-3 border-black bg-white overflow-hidden shadow-brutal group cursor-pointer"
                     onClick={() => setSelectedProduct(product)}
                   >
-                    <div className="w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full border-4 border-black bg-white overflow-hidden shadow-brutal p-1 transition-transform duration-300 group-hover:scale-105">
-                      <img 
-                        src={product.image} 
-                        alt={product.name} 
-                        loading="lazy"
-                        className="w-full h-full object-cover rounded-full group-hover:rotate-3 transition-transform duration-300"
-                      />
-                    </div>
-                    <span className="auto absolute bottom-1 right-2 bg-brandYellow text-black text-[9px] font-black uppercase px-2 py-0.5 rounded-full border border-black shadow-brutal">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <span className="absolute bottom-2 right-2 bg-brandYellow text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-black shadow-brutal">
                       {product.highlight}
                     </span>
                   </div>
@@ -239,7 +235,7 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
                         </>
                       ) : (
                         <div className="w-full bg-gray-200 text-gray-700 font-display font-black text-xs py-2 px-3 rounded-full border-2 border-gray-400 uppercase text-center cursor-not-allowed">
-                          ⛔ No disponible
+                          No disponible
                         </div>
                       )}
                     </div>

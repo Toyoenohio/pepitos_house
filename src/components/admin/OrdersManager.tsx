@@ -38,47 +38,47 @@ export const STATUS_CONFIG: Record<string, { label: string; badgeClass: string; 
   pending_whatsapp: {
     label: 'A la Mano (Nuevo)',
     badgeClass: 'bg-amber-300 text-black border-black',
-    icon: '⚡',
+    icon: '',
     nextStatus: 'in_preparation',
-    nextLabel: '👨‍🍳 A Cocina',
+    nextLabel: '‍A Cocina',
   },
   pending_review: {
     label: 'Por Revisar',
     badgeClass: 'bg-orange-300 text-black border-black',
-    icon: '⚠️',
+    icon: '️',
     nextStatus: 'in_preparation',
-    nextLabel: '👨‍🍳 A Cocina',
+    nextLabel: '‍A Cocina',
   },
   in_preparation: {
     label: 'En Preparación',
     badgeClass: 'bg-brandBlue text-white border-black',
-    icon: '👨‍🍳',
+    icon: '‍',
     nextStatus: 'ready_to_dispatch',
-    nextLabel: '📦 Listo para Despachar',
+    nextLabel: 'Listo para Despachar',
   },
   ready_to_dispatch: {
     label: 'Por Despachar',
     badgeClass: 'bg-yellow-400 text-black border-black',
-    icon: '🛵',
+    icon: '',
     nextStatus: 'dispatched',
-    nextLabel: '🚚 Salir a Despacho',
+    nextLabel: 'Salir a Despacho',
   },
   dispatched: {
     label: 'En Camino',
     badgeClass: 'bg-indigo-500 text-white border-black',
-    icon: '🚚',
+    icon: '',
     nextStatus: 'delivered',
-    nextLabel: '✅ Marcar Entregado',
+    nextLabel: 'Marcar Entregado',
   },
   delivered: {
     label: 'Entregado',
     badgeClass: 'bg-emerald-500 text-white border-black',
-    icon: '✅',
+    icon: '',
   },
   cancelled: {
     label: 'Cancelado',
     badgeClass: 'bg-red-500 text-white border-black',
-    icon: '❌',
+    icon: '',
   },
 };
 
@@ -215,7 +215,7 @@ export default function OrdersManager() {
     const cleanPhone = phone.replace(/[^0-9]/g, '');
     const validPhone = cleanPhone.startsWith('58') ? cleanPhone : cleanPhone.startsWith('0') ? `58${cleanPhone.slice(1)}` : `58${cleanPhone}`;
     const text = encodeURIComponent(
-      `¡Hola ${order.customerName}! 🌭 Te escribimos de Pepitos House 251 sobre tu pedido #${order.id}.`
+      `¡Hola ${order.customerName}! Te escribimos de Pepitos House 251 sobre tu pedido #${order.id}.`
     );
     return `https://wa.me/${validPhone}?text=${text}`;
   }
@@ -230,7 +230,7 @@ export default function OrdersManager() {
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase text-gray-600">A la Mano</span>
-            <span className="text-xl">⚡</span>
+            <span className="text-xl"></span>
           </div>
           <div className="font-display font-black text-3xl mt-1 text-amber-500">{stats.aLaMano}</div>
           <span className="text-[10px] font-bold text-gray-500">Nuevos / Por confirmar</span>
@@ -242,7 +242,7 @@ export default function OrdersManager() {
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase text-gray-600">En Cocina</span>
-            <span className="text-xl">👨‍🍳</span>
+            <span className="text-xl">‍</span>
           </div>
           <div className="font-display font-black text-3xl mt-1 text-brandBlue">{stats.enCocina}</div>
           <span className="text-[10px] font-bold text-gray-500">En preparación</span>
@@ -254,7 +254,7 @@ export default function OrdersManager() {
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase text-gray-600">Por Despachar</span>
-            <span className="text-xl">🛵</span>
+            <span className="text-xl"></span>
           </div>
           <div className="font-display font-black text-3xl mt-1 text-orange-500">{stats.porDespachar}</div>
           <span className="text-[10px] font-bold text-gray-500">Listos / En camino</span>
@@ -266,7 +266,7 @@ export default function OrdersManager() {
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase text-gray-600">Entregados</span>
-            <span className="text-xl">✅</span>
+            <span className="text-xl"></span>
           </div>
           <div className="font-display font-black text-3xl mt-1 text-emerald-600">{stats.entregados}</div>
           <span className="text-[10px] font-bold text-gray-500">Completados</span>
@@ -275,7 +275,7 @@ export default function OrdersManager() {
         <div className="col-span-2 sm:col-span-1 bg-black text-white p-4 rounded-2xl border-3 border-black shadow-brutal">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase text-gray-400">Total Ventas</span>
-            <span className="text-xl">💵</span>
+            <span className="text-xl"></span>
           </div>
           <div className="font-display font-black text-2xl sm:text-3xl mt-1 text-brandYellow">
             ${stats.totalVentas.toFixed(2)}
@@ -291,11 +291,11 @@ export default function OrdersManager() {
           <div className="flex flex-wrap items-center gap-1.5">
             {[
               { id: 'all', label: 'Todos', count: stats.total },
-              { id: 'a_la_mano', label: '⚡ A la Mano', count: stats.aLaMano },
-              { id: 'en_cocina', label: '👨‍🍳 En Cocina', count: stats.enCocina },
-              { id: 'por_despachar', label: '🛵 Por Despachar', count: stats.porDespachar },
-              { id: 'entregados', label: '✅ Entregados', count: stats.entregados },
-              { id: 'cancelados', label: '❌ Cancelados' },
+              { id: 'a_la_mano', label: 'A la Mano', count: stats.aLaMano },
+              { id: 'en_cocina', label: '‍En Cocina', count: stats.enCocina },
+              { id: 'por_despachar', label: 'Por Despachar', count: stats.porDespachar },
+              { id: 'entregados', label: 'Entregados', count: stats.entregados },
+              { id: 'cancelados', label: 'Cancelados' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -337,7 +337,7 @@ export default function OrdersManager() {
               disabled={loading}
               className="bg-brandYellow hover:bg-white text-black font-display font-black text-xs px-3.5 py-1.5 rounded-full border-2 border-black shadow-brutal uppercase transition cursor-pointer disabled:opacity-60 flex items-center gap-1.5"
             >
-              <span className={loading ? 'animate-spin' : ''}>🔄</span>
+              <span className={loading ? 'animate-spin' : ''}></span>
               <span>Actualizar</span>
             </button>
           </div>
@@ -353,7 +353,7 @@ export default function OrdersManager() {
               placeholder="Buscar por cliente, teléfono, zona o # orden..."
               className="w-full bg-brandPillBg border-2 border-black rounded-xl py-2 pl-9 pr-3 text-xs sm:text-sm font-semibold outline-none focus:ring-2 focus:ring-brandBlue"
             />
-            <span className="absolute left-3 top-2.5 text-xs text-gray-500">🔍</span>
+            <span className="absolute left-3 top-2.5 text-xs text-gray-500"></span>
           </div>
           {searchQuery && (
             <button
@@ -372,19 +372,19 @@ export default function OrdersManager() {
 
       {error && (
         <div role="alert" className="bg-red-100 border-3 border-red-600 text-red-900 font-display font-black text-xs px-4 py-3 rounded-2xl uppercase shadow-brutal">
-          ⚠️ {error}
+          ️ {error}
         </div>
       )}
 
       {/* Orders List / Empty State */}
       {loading && orders.length === 0 ? (
         <div className="bg-white p-12 rounded-3xl border-4 border-black text-center space-y-3 shadow-brutal">
-          <div className="text-4xl animate-bounce">📦</div>
+          <div className="text-4xl animate-bounce"></div>
           <div className="font-display font-black text-lg uppercase">Cargando pedidos de cocina...</div>
         </div>
       ) : filteredOrders.length === 0 ? (
         <div className="bg-white p-12 rounded-3xl border-4 border-black text-center space-y-3 shadow-brutal">
-          <div className="text-4xl">🍔</div>
+          <div className="text-4xl"></div>
           <div className="font-display font-black text-lg uppercase">No hay pedidos en esta sección</div>
           <p className="text-xs text-gray-500 max-w-sm mx-auto font-semibold">
             {searchQuery
@@ -416,7 +416,7 @@ export default function OrdersManager() {
                           {formatDate(order.createdAt)} • {formatTime(order.createdAt)}
                         </span>
                         <span className="text-xs font-bold bg-brandYellow text-black px-2 py-0.5 rounded-md border border-black">
-                          📍 {order.deliveryZone}
+                          {order.deliveryZone}
                         </span>
                       </div>
                       <span className="text-[11px] font-bold text-gray-500">
@@ -441,7 +441,7 @@ export default function OrdersManager() {
                       title="Ver Comanda / Ticket de Cocina"
                       className="bg-brandPillBg hover:bg-black hover:text-white transition px-2.5 py-1 rounded-full border-2 border-black text-xs font-bold cursor-pointer"
                     >
-                      🧾 Ticket
+                      Ticket
                     </button>
                   </div>
                 </div>
@@ -462,12 +462,12 @@ export default function OrdersManager() {
                         rel="noopener noreferrer"
                         className="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-[10px] px-2 py-0.5 rounded-full border border-black shadow-sm uppercase inline-flex items-center gap-1 transition"
                       >
-                        <span>💬 WhatsApp</span>
+                        <span>WhatsApp</span>
                       </a>
                     </div>
                     {order.customerEmail && order.customerEmail !== 'sin-email@pepitos.local' && (
                       <div className="text-gray-600 text-[11px]">
-                        ✉️ {order.customerEmail}
+                        ️ {order.customerEmail}
                       </div>
                     )}
                   </div>
@@ -479,7 +479,7 @@ export default function OrdersManager() {
                     </div>
                     {order.referencePoint && (
                       <div className="text-brandBlue font-bold text-[11px]">
-                        📍 Ref / Nota: {order.referencePoint}
+                        Ref / Nota: {order.referencePoint}
                       </div>
                     )}
                   </div>
@@ -560,7 +560,7 @@ export default function OrdersManager() {
                         onClick={() => handleStatusChange(order.id, cfg.nextStatus!)}
                         className="bg-black hover:bg-brandBlue text-white font-display font-black text-xs px-4 py-2 rounded-full border-2 border-black shadow-brutal transition cursor-pointer disabled:opacity-60 flex items-center gap-1.5 uppercase"
                       >
-                        {isUpdating && <span className="animate-spin">⏳</span>}
+                        {isUpdating && <span className="animate-spin"></span>}
                         <span>{cfg.nextLabel}</span>
                       </button>
                     )}
@@ -573,12 +573,12 @@ export default function OrdersManager() {
                         onChange={(e) => handleStatusChange(order.id, e.target.value)}
                         className="bg-white border-2 border-black rounded-full px-3 py-1.5 text-xs font-bold uppercase shadow-sm cursor-pointer outline-none focus:ring-2 focus:ring-brandBlue"
                       >
-                        <option value="pending_whatsapp">⚡ A la Mano (Nuevo)</option>
-                        <option value="in_preparation">👨‍🍳 En Preparación</option>
-                        <option value="ready_to_dispatch">🛵 Por Despachar</option>
-                        <option value="dispatched">🚚 En Camino</option>
-                        <option value="delivered">✅ Entregado</option>
-                        <option value="cancelled">❌ Cancelar Pedido</option>
+                        <option value="pending_whatsapp">A la Mano (Nuevo)</option>
+                        <option value="in_preparation">‍En Preparación</option>
+                        <option value="ready_to_dispatch">Por Despachar</option>
+                        <option value="dispatched">En Camino</option>
+                        <option value="delivered">Entregado</option>
+                        <option value="cancelled">Cancelar Pedido</option>
                       </select>
                     </div>
                   </div>
@@ -608,7 +608,7 @@ export default function OrdersManager() {
             </div>
 
             <div className="text-center border-b-2 border-dashed border-black pb-3 space-y-1">
-              <div className="font-black text-base font-sans">🌭 PEPITOS HOUSE 251 🌭</div>
+              <div className="font-black text-base font-sans">PEPITOS HOUSE 251 </div>
               <div className="text-[11px] font-bold">Auténtico Sabor Guaro</div>
               <div className="text-[10px] text-gray-600">
                 {formatDate(selectedTicketOrder.createdAt)} • {formatTime(selectedTicketOrder.createdAt)}
@@ -653,7 +653,7 @@ export default function OrdersManager() {
                 onClick={() => window.print()}
                 className="flex-1 bg-black text-white font-display font-black py-2.5 rounded-full border-2 border-black uppercase text-xs hover:bg-brandBlue transition cursor-pointer"
               >
-                🖨️ Imprimir Ticket
+                ️ Imprimir Ticket
               </button>
               <button
                 type="button"

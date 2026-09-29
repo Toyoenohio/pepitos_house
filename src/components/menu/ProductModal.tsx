@@ -118,9 +118,9 @@ export default function ProductModal({ product, onClose, onToast }: Props) {
             </svg>
           </button>
 
-          {/* Plate Image */}
-          <div className="w-32 h-32 rounded-full border-4 border-black bg-white shadow-brutal p-1 overflow-hidden">
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded-full" />
+          {/* Full Product Photo */}
+          <div className="w-full max-w-xs sm:max-w-sm aspect-[4/3] rounded-2xl border-4 border-black bg-white shadow-brutal overflow-hidden">
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
           </div>
 
           <div className="mt-3 flex gap-2">
@@ -259,7 +259,7 @@ export default function ProductModal({ product, onClose, onToast }: Props) {
             </button>
           ) : (
             <div className="flex-1 bg-gray-300 text-gray-700 font-display font-black py-3 px-4 rounded-2xl border-2 border-gray-500 uppercase tracking-wide text-sm text-center cursor-not-allowed">
-              ⛔ Agotado temporalmente
+              Agotado temporalmente
             </div>
           )}
         </div>

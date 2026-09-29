@@ -20,7 +20,6 @@ const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.loca
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div class="space-y-5">
           <div class="inline-flex items-center gap-2 bg-white px-3.5 py-1 rounded-full border-2 border-black shadow-brutal">
-            <span class="text-xl">🔥</span>
             <span class="font-display font-black text-xs uppercase tracking-wider">
               Auténtico Sabor Guaro en Cada Bocado
             </span>
@@ -46,20 +45,20 @@ const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.loca
               href="/membresia" 
               class="bg-white hover:bg-brandYellow transition text-black font-display font-black px-6 py-3.5 rounded-full border-2 border-black shadow-brutal uppercase text-sm flex items-center gap-2"
             >
-              <span>🎟️ Tarjeta de Sellos</span>
+              <span>Tarjeta de Sellos</span>
             </a>
           </div>
 
           <!-- Badges -->
           <div class="pt-2 flex items-center gap-4 text-xs font-black uppercase text-black/70">
             <div class="flex items-center gap-1.5">
-              <span class="text-green-600">✓</span> 30cm, 50cm y 1 Metro
+              <span class="text-green-600 font-bold">✓</span> 30cm, 50cm y 1 Metro
             </div>
             <div class="flex items-center gap-1.5">
-              <span class="text-green-600">✓</span> Pago Móvil BCV, Zelle
+              <span class="text-green-600 font-bold">✓</span> Pago Móvil BCV, Zelle
             </div>
             <div class="flex items-center gap-1.5">
-              <span class="text-green-600">✓</span> Delivery Anzoátegui
+              <span class="text-green-600 font-bold">✓</span> Delivery Anzoátegui
             </div>
           </div>
         </div>
@@ -68,21 +67,21 @@ const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.loca
         <div class="flex items-center justify-center relative">
           <div class="w-full max-w-sm rounded-3xl border-4 border-black bg-white shadow-brutal-lg overflow-hidden transform hover:rotate-1 transition-transform">
             <div class="bg-brandBlue p-4 border-b-2 border-black flex items-center justify-between text-white">
-              <span class="font-display font-black text-sm uppercase">🔥 Consiente al Chucho</span>
+              <span class="font-display font-black text-sm uppercase">Consiente al Chucho</span>
               <span class="bg-brandYellow text-black font-black text-[10px] px-2 py-0.5 rounded-full border border-black">100% lomito</span>
             </div>
             <div class="p-4">
               <img 
-                src="https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80" 
+                src="/images/products/pepito-clasico.jpg" 
                 alt="Pepito Tradicional 251"
                 class="w-full h-64 object-cover rounded-2xl border-2 border-black"
               />
               <div class="mt-3 flex items-center justify-between">
                 <div>
-                  <h3 class="font-display font-black text-base uppercase">Pepito Mixto Supreme</h3>
-                  <span class="text-xs font-bold text-gray-600">Lomito, Pollo, tocineta y queso de mano</span>
+                  <h3 class="font-display font-black text-base uppercase">Pepito Clásico 251</h3>
+                  <span class="text-xs font-bold text-gray-600">Lomito, Pollo o Mixto con tocineta y pecorino</span>
                 </div>
-                <span class="font-display font-black text-xl text-brandBlue">$11.50</span>
+                <span class="font-display font-black text-xl text-brandBlue">$13.00</span>
               </div>
             </div>
           </div>
@@ -94,7 +93,6 @@ const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.loca
     <!-- Features Section -->
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <div class="bg-white p-5 sm:p-6 rounded-2xl border-3 border-black shadow-brutal space-y-2">
-        <span class="text-3xl">💵</span>
         <h3 class="font-display font-black text-base uppercase">Pago en Tu Moneda</h3>
         <p class="text-xs text-gray-600 font-semibold">
           Paga cómodamente con Pago Móvil (Tasa BCV), Zelle, Efectivo USD o Punto de Venta.
@@ -102,7 +100,6 @@ const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.loca
       </div>
 
       <div class="bg-white p-5 sm:p-6 rounded-2xl border-3 border-black shadow-brutal space-y-2">
-        <span class="text-3xl">🔵</span>
         <h3 class="font-display font-black text-base uppercase">Delivery Ruta Guara</h3>
         <p class="text-xs text-gray-600 font-semibold">
           Entrega rápida en Barcelona, Lechería y Puerto La Cruz. Tu pepito llega calientico.
@@ -110,7 +107,6 @@ const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.loca
       </div>
 
       <div class="bg-white p-5 sm:p-6 rounded-2xl border-3 border-black shadow-brutal space-y-2">
-        <span class="text-3xl">🎟️</span>
         <h3 class="font-display font-black text-base uppercase">10 Sellos = 1 Gratis</h3>
         <p class="text-xs text-gray-600 font-semibold">
           Acumula sellos digitales con tu correo en cada pedido y reclama tu premio.

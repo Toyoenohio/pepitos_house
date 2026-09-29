@@ -34,7 +34,7 @@ export const WHATSAPP_PHONE = '584248319602';
 export function formatWhatsAppMessage(customer: CustomerData, items: CartItem[], total: number, deliveryFee: number = 0): string {
   const lines: string[] = [];
 
-  lines.push('🥖 *¡NUEVO PEDIDO - PEPITOS HOUSE 251!* 🥖');
+  lines.push('*¡NUEVO PEDIDO - PEPITOS HOUSE 251!* ');
   lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━');
   lines.push('*Cliente:* ' + customer.name);
   lines.push('*Teléfono:* ' + customer.phone);
@@ -54,12 +54,12 @@ export function formatWhatsAppMessage(customer: CustomerData, items: CartItem[],
     const itemTotal = (item.unitPrice * item.quantity).toFixed(2);
     lines.push('\n*' + (index + 1) + '. ' + item.name + '* x' + item.quantity + ' = *$' + itemTotal + '*');
     if (item.size) {
-      lines.push('   📏 Tamaño: _' + item.size + '_');
+      lines.push('   Tamaño: _' + item.size + '_');
     }
     const extras = item.modifiers.filter(m => m.groupId !== 'size');
     if (extras.length > 0) {
       const extrasStr = extras.map(e => e.optionName + ' (+$' + e.priceDelta.toFixed(2) + ')').join(', ');
-      lines.push('   ➕ Extras: _' + extrasStr + '_');
+      lines.push('   Extras: _' + extrasStr + '_');
     }
   });
 
@@ -71,14 +71,14 @@ export function formatWhatsAppMessage(customer: CustomerData, items: CartItem[],
   } else {
     lines.push('Delivery (' + customer.zone + '): *GRATIS* (Promo)');
   }
-  lines.push('💰 *TOTAL A PAGAR: $' + total.toFixed(2) + '*');
+  lines.push('*TOTAL A PAGAR: $' + total.toFixed(2) + '*');
 
   if (customer.notes && customer.notes.trim()) {
     lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    lines.push('📝 *Notas:* ' + customer.notes);
+    lines.push('*Notas:* ' + customer.notes);
   }
 
-  lines.push('\n🙏 *¡Por favor confirmen mi pedido para procesarlo! Gracias.*');
+  lines.push('\n*¡Por favor confirmen mi pedido para procesarlo! Gracias.*');
 
   return lines.join('\n');
 }
