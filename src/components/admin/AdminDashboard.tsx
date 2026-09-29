@@ -7,6 +7,7 @@ import {
   toggleProductDay, 
   getEffectiveProduct 
 } from '../../stores/availabilityStore';
+import OrdersManager from './OrdersManager';
 
 export default function AdminDashboard({ initialOverrides = {} }: { initialOverrides?: Record<string, { isAvailable: boolean; availableDays: string[] }> }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,6 +17,7 @@ export default function AdminDashboard({ initialOverrides = {} }: { initialOverr
   const [syncError, setSyncError] = useState('');
   const [busy, setBusy] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [activeTab, setActiveTab] = useState<'orders' | 'menu'>('orders');
 
   const overrides = useStore($productOverrides);
   const [extraProducts, setExtraProducts] = useState<MenuItem[]>(() => {
@@ -254,12 +256,45 @@ export default function AdminDashboard({ initialOverrides = {} }: { initialOverr
         </div>
       )}
 
-      {/* Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white p-5 rounded-2xl border-3 border-black shadow-brutal">
-          <span className="text-xs font-bold text-gray-600 uppercase">Total Platos</span>
-          <div className="font-display font-black text-3xl">{allProducts.length}</div>
-        </div>
+      {/* Navigation Tabs */}
+      <div className="flex flex-wrap items-center gap-2 border-b-4 border-black pb-3">
+        <button
+          type="button"
+          onClick={() => setActiveTab('orders')}
+          className={`px-5 py-2.5 rounded-full border-3 border-black font-display font-black text-sm uppercase transition cursor-pointer flex items-center gap-2 ${
+            activeTab === 'orders'
+              ? 'bg-brandYellow text-black shadow-brutal'
+              : 'bg-white text-gray-700 hover:bg-gray-100'
+          }`}
+        >
+          <span className="text-base">📦</span>
+          <span>Control de Pedidos & Despacho</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab('menu')}
+          className={`px-5 py-2.5 rounded-full border-3 border-black font-display font-black text-sm uppercase transition cursor-pointer flex items-center gap-2 ${
+            activeTab === 'menu'
+              ? 'bg-brandYellow text-black shadow-brutal'
+              : 'bg-white text-gray-700 hover:bg-gray-100'
+          }`}
+        >
+          <span className="text-base">🌭</span>
+          <span>Catálogo & Disponibilidad (86)</span>
+        </button>
+      </div>
+
+      {activeTab === 'orders' ? (
+        <OrdersManager />
+      ) : (
+        <>
+          {/* Stats Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-white p-5 rounded-2xl border-3 border-black shadow-brutal">
+              <span className="text-xs font-bold text-gray-600 uppercase">Total Platos</span>
+              <div className="font-display font-black text-3xl">{allProducts.length}</div>
+            </div>
         <div className="bg-white p-5 rounded-2xl border-3 border-black shadow-brutal">
           <span className="text-xs font-bold text-gray-600 uppercase">Platos Activos</span>
           <div className="font-display font-black text-3xl text-emerald-600">
@@ -347,6 +382,8 @@ export default function AdminDashboard({ initialOverrides = {} }: { initialOverr
           ))}
         </div>
       </div>
+      </>
+      )}
 
       {/* New Item Modal */}
       {newItemModal && (

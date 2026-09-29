@@ -1,4 +1,4 @@
-﻿import type { APIRoute } from 'astro';
+import type { APIRoute } from 'astro';
 import { getDb } from '../../db/client';
 import { orders, loyaltyMembers, loyaltyStamps } from '../../db/schema';
 import { eq } from 'drizzle-orm';
@@ -73,6 +73,8 @@ export const POST: APIRoute = async (context) => {
   const zone = str(c.zone, 40);
   const address = str(c.address, 200);
   const reference = str(c.reference, 200);
+  const notes = str(c.notes, 250);
+  const fullReference = notes ? (reference ? `${reference} | Nota: ${notes}` : `Nota: ${notes}`) : reference;
   const paymentMethod = str(c.paymentMethod, 40) || 'Por confirmar';
 
   const errors: string[] = [];
@@ -143,7 +145,7 @@ export const POST: APIRoute = async (context) => {
       customerEmail: email || 'sin-email@pepitos.local',
       deliveryZone: zone,
       deliveryAddress: address,
-      referencePoint: reference || '',
+      referencePoint: fullReference || '',
       paymentMethod,
       items,
       subtotal: String(subtotal),
