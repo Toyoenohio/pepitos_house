@@ -4,6 +4,7 @@ import { orders, loyaltyMembers, loyaltyStamps } from '../../db/schema';
 import { eq } from 'drizzle-orm';
 import { runtimeEnv } from '../../lib/env';
 import { INITIAL_PRODUCTS, CATEGORY_MODIFIERS, type MenuItem, type ProductGroup } from '../../lib/productsData';
+import { getEffectiveStoreStatus } from '../../lib/storeStatus';
 
 export const prerender = false;
 
@@ -63,6 +64,14 @@ export const POST: APIRoute = async (context) => {
     body = await context.request.json();
   } catch {
     return Response.json({ error: 'Cuerpo inválido.' }, { status: 400 });
+  }
+
+  // Verificar si el restaurante está abierto para pedidos (respeta interruptor manual del admin)
+  const storeStatus = await getEffectiveStoreStatus(context.locals);
+  if (!storeStatus.isOpen) {
+    return Response.json({ 
+      error: storeStatus.message || 'El local se encuentra cerrado para pedidos en este momento.' 
+    }, { status: 400 });
   }
 
   // ---------------------------------------------------------- validación

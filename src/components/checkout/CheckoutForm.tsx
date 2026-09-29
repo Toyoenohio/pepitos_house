@@ -29,6 +29,22 @@ export default function CheckoutForm() {
   useEffect(() => {
     setMounted(true);
     setSchedule(checkRestaurantOpen());
+
+    // Check store opening status from server (respects manual open/closed switches)
+    fetch('/api/store-status', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => {
+        if (data && typeof data.isOpen === 'boolean') {
+          setSchedule(prev => ({
+            ...prev,
+            isOpen: data.isOpen,
+            message: data.message,
+            nextOpeningMessage: data.mode === 'open' ? 'Horario especial habilitado por la administración.' : (data.notice || prev.nextOpeningMessage)
+          }));
+        }
+      })
+      .catch(() => {});
+
     // Load saved email or data from localStorage if available
     try {
       const savedEmail = localStorage.getItem('ph251_member_email');
@@ -56,11 +72,21 @@ export default function CheckoutForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // Verify hours strictly
-    const currentSchedule = checkRestaurantOpen();
-    if (!currentSchedule.isOpen) {
-      setErrorMessage(`Local cerrado. ${currentSchedule.message} ${currentSchedule.nextOpeningMessage}`);
-      return;
+    // Verify store status (respects manual open/closed switches by admin or schedule)
+    try {
+      const res = await fetch('/api/store-status', { cache: 'no-store' });
+      const statusData = await res.json();
+      if (statusData && statusData.isOpen === false) {
+        setErrorMessage(`Local cerrado. ${statusData.message}`);
+        setSchedule(prev => ({ ...prev, isOpen: false, message: statusData.message }));
+        return;
+      }
+    } catch {
+      const currentSchedule = checkRestaurantOpen();
+      if (!currentSchedule.isOpen) {
+        setErrorMessage(`Local cerrado. ${currentSchedule.message} ${currentSchedule.nextOpeningMessage}`);
+        return;
+      }
     }
 
     if (items.length === 0) {

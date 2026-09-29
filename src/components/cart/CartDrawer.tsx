@@ -14,6 +14,21 @@ export default function CartDrawer() {
     setMounted(true);
     setSchedule(checkRestaurantOpen());
 
+    // Check store opening status from server (respects manual open/closed switches)
+    fetch('/api/store-status', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => {
+        if (data && typeof data.isOpen === 'boolean') {
+          setSchedule(prev => ({
+            ...prev,
+            isOpen: data.isOpen,
+            message: data.message,
+            nextOpeningMessage: data.mode === 'open' ? 'Horario especial habilitado por la administración.' : (data.notice || prev.nextOpeningMessage)
+          }));
+        }
+      })
+      .catch(() => {});
+
     function handleOpenCart() {
       setIsOpen(true);
     }
@@ -166,10 +181,10 @@ export default function CartDrawer() {
                 disabled
                 className="w-full bg-gray-400 text-white py-3 rounded-full border-2 border-black font-display font-black text-base uppercase tracking-wider cursor-not-allowed"
               >
-                LOCAL CERRADO (JUE-LUN)
+                LOCAL CERRADO
               </button>
-              <p className="text-[10px] text-red-600 font-bold">
-                No se pueden procesar pedidos fuera del horario (3pm-10pm).
+              <p className="text-[10px] text-red-600 font-bold px-2">
+                {schedule.message || 'No se pueden procesar pedidos en este momento.'}
               </p>
             </div>
           ) : (

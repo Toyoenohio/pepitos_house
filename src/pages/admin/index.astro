@@ -2,10 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdminDashboard from '../../components/admin/AdminDashboard';
 import { loadOverrides } from '../../lib/overrides';
+import { getEffectiveStoreStatus } from '../../lib/storeStatus';
 
 // El panel arranca mostrando el estado real de la base (no el que quedó en el
 // navegador de quien lo abra).
 const overrides = await loadOverrides(Astro.locals);
+const initialStoreStatus = await getEffectiveStoreStatus(Astro.locals);
 ---
 
 <BaseLayout
@@ -14,6 +16,10 @@ const overrides = await loadOverrides(Astro.locals);
   noindex={true}
 >
   <div class="max-w-6xl mx-auto w-full px-3 md:px-6 py-8">
-    <AdminDashboard initialOverrides={overrides} client:load />
+    <AdminDashboard 
+      initialOverrides={overrides} 
+      initialStoreStatus={initialStoreStatus} 
+      client:load 
+    />
   </div>
 </BaseLayout>

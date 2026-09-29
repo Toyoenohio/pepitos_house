@@ -8,8 +8,15 @@ import {
   getEffectiveProduct 
 } from '../../stores/availabilityStore';
 import OrdersManager from './OrdersManager';
+import type { StoreStatusResult, StoreMode } from '../../lib/storeStatus';
 
-export default function AdminDashboard({ initialOverrides = {} }: { initialOverrides?: Record<string, { isAvailable: boolean; availableDays: string[] }> }) {
+export default function AdminDashboard({ 
+  initialOverrides = {},
+  initialStoreStatus
+}: { 
+  initialOverrides?: Record<string, { isAvailable: boolean; availableDays: string[] }>;
+  initialStoreStatus?: StoreStatusResult;
+}) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checking, setChecking] = useState(true);
   const [passwordInput, setPasswordInput] = useState('');
@@ -18,6 +25,14 @@ export default function AdminDashboard({ initialOverrides = {} }: { initialOverr
   const [busy, setBusy] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<'orders' | 'menu'>('orders');
+
+  // Master Store Opening Status State
+  const [storeMode, setStoreMode] = useState<StoreMode>(initialStoreStatus?.mode || 'auto');
+  const [storeNotice, setStoreNotice] = useState<string>(initialStoreStatus?.notice || '');
+  const [isStoreOpen, setIsStoreOpen] = useState<boolean>(initialStoreStatus?.isOpen ?? false);
+  const [storeMessage, setStoreMessage] = useState<string>(initialStoreStatus?.message || '');
+  const [savingStatus, setSavingStatus] = useState(false);
+  const [statusFeedback, setStatusFeedback] = useState('');
 
   const overrides = useStore($productOverrides);
   const [extraProducts, setExtraProducts] = useState<MenuItem[]>(() => {
@@ -112,6 +127,36 @@ export default function AdminDashboard({ initialOverrides = {} }: { initialOverr
       if (!r.ok) setSyncError(d?.error || 'No se pudo guardar el cambio.');
     } catch {
       setSyncError('Sin conexión: el cambio no se guardó en el servidor.');
+    }
+  }
+
+  async function updateStoreMode(newMode: StoreMode, customNotice?: string) {
+    setSavingStatus(true);
+    setStatusFeedback('');
+    const noticeToSend = customNotice !== undefined ? customNotice : storeNotice;
+    try {
+      const res = await fetch('/api/admin/store-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode: newMode, notice: noticeToSend }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'No se pudo actualizar el estado del local.');
+      setStoreMode(data.mode);
+      setIsStoreOpen(data.isOpen);
+      setStoreMessage(data.message);
+      setStatusFeedback(
+        newMode === 'open' 
+          ? '🟢 ¡Local marcado como ABIERTO! Se aceptan pedidos sin importar el horario.' 
+          : newMode === 'closed' 
+          ? '⛔ ¡Local CERRADO! Los pedidos web han sido bloqueados en el checkout.' 
+          : '⏰ Modo AUTOMÁTICO activo (según horario de Jueves a Lunes 3pm - 10pm).'
+      );
+      setTimeout(() => setStatusFeedback(''), 5000);
+    } catch (err: any) {
+      setSyncError(err.message || 'Error al guardar estado de apertura.');
+    } finally {
+      setSavingStatus(false);
     }
   }
 
@@ -255,6 +300,106 @@ export default function AdminDashboard({ initialOverrides = {} }: { initialOverr
           ⚠️ {syncError} — el cambio no se guardó en el servidor.
         </div>
       )}
+
+      {/* Master Store Opening Switch */}
+      <div className={`p-5 rounded-3xl border-4 border-black shadow-brutal transition-colors ${
+        isStoreOpen ? 'bg-emerald-50 border-black' : 'bg-red-50 border-black'
+      }`}>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-2xl">{isStoreOpen ? '🟢' : '⛔'}</span>
+              <h2 className="font-display font-black text-xl uppercase tracking-tight">
+                Estado del Local para Pedidos
+              </h2>
+              <span className={`text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full border border-black shadow-sm ${
+                isStoreOpen ? 'bg-emerald-500 text-white' : 'bg-red-600 text-white'
+              }`}>
+                {isStoreOpen ? 'RECIBIENDO PEDIDOS EN VIVO' : 'PEDIDOS BLOQUEADOS'}
+              </span>
+              <span className="text-[10px] font-bold text-gray-500 uppercase bg-white px-2 py-0.5 rounded-md border border-black/30">
+                Modo: {storeMode === 'open' ? 'Forzado Abierto' : storeMode === 'closed' ? 'Forzado Cerrado' : 'Automático'}
+              </span>
+            </div>
+            <p className="text-xs font-bold text-gray-800">
+              {storeMessage || (isStoreOpen ? 'El local está abierto para recibir pedidos de clientes.' : 'El local está cerrado y no se procesan pedidos.')}
+            </p>
+          </div>
+
+          {/* Mode Selector Buttons */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              disabled={savingStatus}
+              onClick={() => updateStoreMode('open')}
+              title="Permitir pedidos a cualquier hora (abrir más temprano o cerrar más tarde)"
+              className={`px-4 py-2.5 rounded-full border-2 border-black font-display font-black text-xs uppercase transition cursor-pointer flex items-center gap-1.5 shadow-sm ${
+                storeMode === 'open'
+                  ? 'bg-emerald-500 text-white shadow-brutal ring-2 ring-black'
+                  : 'bg-white text-black hover:bg-emerald-100'
+              }`}
+            >
+              <span>🟢 ABRIR AHORA</span>
+            </button>
+
+            <button
+              type="button"
+              disabled={savingStatus}
+              onClick={() => updateStoreMode('closed')}
+              title="Bloquear pedidos de inmediato (cerrar temporalmente por lluvia, inventario, etc.)"
+              className={`px-4 py-2.5 rounded-full border-2 border-black font-display font-black text-xs uppercase transition cursor-pointer flex items-center gap-1.5 shadow-sm ${
+                storeMode === 'closed'
+                  ? 'bg-red-600 text-white shadow-brutal ring-2 ring-black'
+                  : 'bg-white text-black hover:bg-red-100'
+              }`}
+            >
+              <span>⛔ CERRAR AHORA</span>
+            </button>
+
+            <button
+              type="button"
+              disabled={savingStatus}
+              onClick={() => updateStoreMode('auto')}
+              title="Seguir el horario estándar de Jueves a Lunes de 3:00 PM a 10:00 PM"
+              className={`px-4 py-2.5 rounded-full border-2 border-black font-display font-black text-xs uppercase transition cursor-pointer flex items-center gap-1.5 shadow-sm ${
+                storeMode === 'auto'
+                  ? 'bg-brandBlue text-white shadow-brutal ring-2 ring-black'
+                  : 'bg-white text-black hover:bg-blue-100'
+              }`}
+            >
+              <span>⏰ AUTOMÁTICO (HORARIO)</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Optional Custom Notice Input */}
+        <div className="mt-3 pt-3 border-t-2 border-black/10 flex flex-col sm:flex-row sm:items-center gap-2">
+          <label className="text-[11px] font-black uppercase text-gray-700 flex-shrink-0">
+            Aviso especial al cliente (opcional):
+          </label>
+          <input
+            type="text"
+            value={storeNotice}
+            onChange={(e) => setStoreNotice(e.target.value)}
+            placeholder="Ej. ¡Hoy abrimos desde la 1:00 PM! / Cerrados por mantenimiento hasta las 5:00 PM"
+            className="flex-1 bg-white border-2 border-black rounded-xl py-1.5 px-3 text-xs font-semibold outline-none focus:ring-2 focus:ring-brandBlue"
+          />
+          <button
+            type="button"
+            disabled={savingStatus}
+            onClick={() => updateStoreMode(storeMode, storeNotice)}
+            className="bg-black hover:bg-brandBlue text-white font-display font-black text-xs px-3.5 py-1.5 rounded-xl border border-black uppercase cursor-pointer"
+          >
+            Guardar Aviso
+          </button>
+        </div>
+
+        {statusFeedback && (
+          <div className="mt-2.5 text-xs font-black uppercase text-emerald-900 bg-emerald-100 p-2.5 rounded-xl border-2 border-emerald-600 shadow-sm">
+            {statusFeedback}
+          </div>
+        )}
+      </div>
 
       {/* Navigation Tabs */}
       <div className="flex flex-wrap items-center gap-2 border-b-4 border-black pb-3">
