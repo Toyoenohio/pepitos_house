@@ -137,20 +137,19 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
           </div>
         ) : (
           filteredProducts.map((product) => {
-            const isAvailableNow = product.isAvailable && isItemAvailableToday(product.availableDays);
+            const isAvailableNow = product.isAvailable !== false && isItemAvailableToday(product.availableDays);
 
             return (
               <article 
                 key={product.id} 
-                className={`bg-white rounded-3xl border-3 border-black overflow-hidden shadow-brutal hover:shadow-brutal-lg transition-all flex flex-col justify-between ${!isAvailableNow ? 'opacity-70' : ''}`}
+                className={`bg-white rounded-3xl border-3 border-black overflow-hidden shadow-brutal hover:shadow-brutal-lg transition-all flex flex-col justify-between ${!isAvailableNow ? 'opacity-80' : ''}`}
               >
                 {/* Top Media Block */}
                 <div className={`${product.bgAccent} p-5 relative border-b-2 border-black flex flex-col items-center justify-center`}>
                   <div className="w-full flex items-center justify-between z-10">
                     <button 
-                      onClick={() => isAvailableNow && setSelectedProduct(product)} 
-                      disabled={!isAvailableNow}
-                      className={`text-[10px] font-display font-black px-2.5 py-1 rounded-full border border-black shadow-brutal uppercase tracking-wider flex items-center gap-1 ${isAvailableNow ? 'bg-black text-white hover:bg-white hover:text-black cursor-pointer' : 'bg-gray-400 text-white cursor-not-allowed'}`}
+                      onClick={() => setSelectedProduct(product)} 
+                      className="text-[10px] font-display font-black px-2.5 py-1 rounded-full border border-black shadow-brutal uppercase tracking-wider flex items-center gap-1 bg-black text-white hover:bg-white hover:text-black cursor-pointer"
                     >
                       <span>INFO</span>
                       <span className="text-brandYellow font-extrabold">+</span>
@@ -159,7 +158,7 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
                     <div className="flex items-center gap-1.5">
                       {!isAvailableNow && (
                         <span className="bg-red-600 text-white font-display font-black text-[9px] px-2.5 py-0.5 rounded-full border-2 border-black shadow-brutal uppercase tracking-wide">
-                          AGOTADO HOY
+                          AGOTADO
                         </span>
                       )}
                       <span className="bg-white text-black font-display font-black text-[10px] px-3 py-0.5 rounded-full border-2 border-black shadow-brutal uppercase italic tracking-wide">
@@ -169,8 +168,8 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
                   </div>
 
                   <div 
-                    className={`relative my-2 ${isAvailableNow ? 'cursor-pointer group' : 'cursor-not-allowed'}`}
-                    onClick={() => isAvailableNow && setSelectedProduct(product)}
+                    className="relative my-2 cursor-pointer group"
+                    onClick={() => setSelectedProduct(product)}
                   >
                     <div className="w-36 h-36 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full border-4 border-black bg-white overflow-hidden shadow-brutal p-1 transition-transform duration-300 group-hover:scale-105">
                       <img 
@@ -190,8 +189,8 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
                 <div className="p-4 flex-1 flex flex-col justify-between space-y-3 bg-brandCream">
                   <div>
                     <h3 
-                      className={`font-display font-black text-lg md:text-xl uppercase tracking-tight text-black leading-snug ${isAvailableNow ? 'cursor-pointer hover:text-brandBlue' : ''} transition-colors`}
-                      onClick={() => isAvailableNow && setSelectedProduct(product)}
+                      className="font-display font-black text-lg md:text-xl uppercase tracking-tight text-black leading-snug cursor-pointer hover:text-brandBlue transition-colors"
+                      onClick={() => setSelectedProduct(product)}
                     >
                       {product.name}
                     </h3>
@@ -239,8 +238,8 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
                           </button>
                         </>
                       ) : (
-                        <div className="w-full bg-gray-300 text-gray-700 font-display font-black text-xs py-2 px-3 rounded-full border-2 border-gray-500 uppercase text-center cursor-not-allowed">
-                          ⛔ Agotado por hoy
+                        <div className="w-full bg-gray-200 text-gray-700 font-display font-black text-xs py-2 px-3 rounded-full border-2 border-gray-400 uppercase text-center cursor-not-allowed">
+                          ⛔ No disponible
                         </div>
                       )}
                     </div>

@@ -60,7 +60,7 @@ export default function AdminDashboard({
     image: 'https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
   });
 
   useEffect(() => {
@@ -177,7 +177,7 @@ export default function AdminDashboard({
       image: newItemForm.image || 'https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80',
       bgAccent: newItemForm.bgAccent || 'bg-brandBlue',
       isAvailable: true,
-      availableDays: newItemForm.availableDays || ['thu', 'fri', 'sat', 'sun', 'mon']
+      availableDays: newItemForm.availableDays || ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
     };
 
     const updated = [created, ...extraProducts];
@@ -199,7 +199,7 @@ export default function AdminDashboard({
       image: 'https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=800&q=80',
       bgAccent: 'bg-brandBlue',
       isAvailable: true,
-      availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+      availableDays: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
     });
   }
 
@@ -493,11 +493,13 @@ export default function AdminDashboard({
                 {/* Days Selector */}
                 <div className="flex items-center gap-1">
                   {[
+                    { k: 'mon', l: 'L' },
+                    { k: 'tue', l: 'M' },
+                    { k: 'wed', l: 'X' },
                     { k: 'thu', l: 'J' },
                     { k: 'fri', l: 'V' },
                     { k: 'sat', l: 'S' },
-                    { k: 'sun', l: 'D' },
-                    { k: 'mon', l: 'L' }
+                    { k: 'sun', l: 'D' }
                   ].map(({ k, l }) => {
                     const hasDay = prod.availableDays?.includes(k);
                     return (

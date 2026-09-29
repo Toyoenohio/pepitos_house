@@ -78,7 +78,10 @@ export function checkRestaurantOpen(date: Date = new Date()): ScheduleStatus {
   };
 }
 
-export function isItemAvailableToday(itemAvailableDays: string[] = OPEN_DAYS, date: Date = new Date()): boolean {
+export const ALL_DAYS: string[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+export function isItemAvailableToday(itemAvailableDays: string[] = ALL_DAYS, date: Date = new Date()): boolean {
+  if (!itemAvailableDays || itemAvailableDays.length === 0) return true;
   const venezuelaTimeStr = date.toLocaleString('en-US', { timeZone: 'America/Caracas' });
   const vzDate = new Date(venezuelaTimeStr);
   const dayKey = DAY_KEYS[vzDate.getDay()];

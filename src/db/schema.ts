@@ -1,4 +1,4 @@
-﻿import { pgTable, text, serial, numeric, timestamp, boolean, integer, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, text, serial, numeric, timestamp, boolean, integer, jsonb } from 'drizzle-orm/pg-core';
 
 export const categories = pgTable('categories', {
   id: serial('id').primaryKey(),
@@ -25,7 +25,7 @@ export const menuItems = pgTable('menu_items', {
   isAvailable: boolean('is_available').notNull().default(true),
   isArchived: boolean('is_archived').notNull().default(false),
   // Days of availability: e.g. [1, 2, 3, 4, 5, 6, 7] or custom object
-  availableDays: jsonb('available_days').default(['thu', 'fri', 'sat', 'sun', 'mon']),
+  availableDays: jsonb('available_days').default(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

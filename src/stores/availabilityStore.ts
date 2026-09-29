@@ -1,5 +1,5 @@
 import { persistentMap } from '@nanostores/persistent';
-import { INITIAL_PRODUCTS, type MenuItem } from '../lib/productsData';
+import { INITIAL_PRODUCTS, ALL_DAYS, type MenuItem } from '../lib/productsData';
 
 export interface ProductOverride {
   isAvailable: boolean;
@@ -22,7 +22,7 @@ export const $productOverrides = persistentMap<Record<string, ProductOverride>>(
 export function toggleProduct86(productId: string, currentAvailable: boolean) {
   const current = $productOverrides.get()[productId];
   const initial = INITIAL_PRODUCTS.find(p => p.id === productId);
-  const baseDays = current?.availableDays || initial?.availableDays || ['thu', 'fri', 'sat', 'sun', 'mon'];
+  const baseDays = current?.availableDays || initial?.availableDays || ALL_DAYS;
 
   $productOverrides.setKey(productId, {
     isAvailable: !currentAvailable,
@@ -34,7 +34,7 @@ export function toggleProductDay(productId: string, dayKey: string) {
   const current = $productOverrides.get()[productId];
   const initial = INITIAL_PRODUCTS.find(p => p.id === productId);
   const baseAvailable = current ? current.isAvailable : (initial?.isAvailable ?? true);
-  const days = current?.availableDays || initial?.availableDays || ['thu', 'fri', 'sat', 'sun', 'mon'];
+  const days = current?.availableDays || initial?.availableDays || ALL_DAYS;
 
   const newDays = days.includes(dayKey)
     ? days.filter(d => d !== dayKey)

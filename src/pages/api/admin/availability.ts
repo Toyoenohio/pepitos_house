@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
   const isAvailable = body?.isAvailable !== false; // default: disponible
   const days = Array.isArray(body?.availableDays)
     ? body.availableDays.filter((d: unknown) => VALID_DAYS.includes(String(d)))
-    : ['thu', 'fri', 'sat', 'sun', 'mon'];
+    : VALID_DAYS;
 
   const db = getDb(env?.DATABASE_URL);
   if (!db) return json({ error: 'Sin conexión a la base de datos.' }, 503);

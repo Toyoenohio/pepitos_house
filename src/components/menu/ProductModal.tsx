@@ -247,15 +247,21 @@ export default function ProductModal({ product, onClose, onToast }: Props) {
             <div className="text-[10px] font-bold text-gray-500 uppercase">Subtotal</div>
             <div className="font-display font-black text-xl text-black">${totalPrice.toFixed(2)}</div>
           </div>
-          <button 
-            type="button"
-            onClick={handleAddToCart}
-            className="flex-1 bg-brandYellow hover:bg-brandYellowDark text-black font-display font-black py-3 px-4 rounded-2xl border-2 border-black shadow-brutal hover:shadow-brutal-hover active:translate-x-0.5 active:translate-y-0.5 transition uppercase tracking-wide text-sm flex items-center justify-center gap-2"
-          >
-            <span>Agregar al pedido</span>
-            <span>•</span>
-            <span>${totalPrice.toFixed(2)}</span>
-          </button>
+          {product.isAvailable !== false ? (
+            <button 
+              type="button"
+              onClick={handleAddToCart}
+              className="flex-1 bg-brandYellow hover:bg-brandYellowDark text-black font-display font-black py-3 px-4 rounded-2xl border-2 border-black shadow-brutal hover:shadow-brutal-hover active:translate-x-0.5 active:translate-y-0.5 transition uppercase tracking-wide text-sm flex items-center justify-center gap-2"
+            >
+              <span>Agregar al pedido</span>
+              <span>•</span>
+              <span>${totalPrice.toFixed(2)}</span>
+            </button>
+          ) : (
+            <div className="flex-1 bg-gray-300 text-gray-700 font-display font-black py-3 px-4 rounded-2xl border-2 border-gray-500 uppercase tracking-wide text-sm text-center cursor-not-allowed">
+              ⛔ Agotado temporalmente
+            </div>
+          )}
         </div>
       </div>
     </div>

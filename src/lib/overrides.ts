@@ -32,7 +32,7 @@ export async function loadOverrides(locals: any): Promise<OverrideMap> {
       .from(menuItems);
     const out: OverrideMap = {};
     for (const r of rows as any[]) {
-      const days = Array.isArray(r.availableDays) ? r.availableDays : ['thu', 'fri', 'sat', 'sun', 'mon'];
+      const days = Array.isArray(r.availableDays) ? r.availableDays : ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
       out[String(r.id)] = { isAvailable: !!r.isAvailable, availableDays: days };
     }
     return out;

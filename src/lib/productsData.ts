@@ -34,6 +34,8 @@ export interface Category {
   emoji: string;
 }
 
+export const ALL_DAYS: string[] = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
 export const INITIAL_CATEGORIES: Category[] = [
   { slug: 'pepitos', name: 'Pepitos Guaros', emoji: '🥖' },
   { slug: 'burgers', name: 'Hamburguesas Smash', emoji: '🍔' },
@@ -60,7 +62,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-clasico.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-champinon',
@@ -75,7 +77,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-champinon.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-gratinado',
@@ -90,7 +92,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-gratinado.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-lomito-gratinado',
@@ -105,7 +107,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-lomito.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-mar-tierra',
@@ -120,7 +122,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-mar-tierra.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-mar-tierra-gratinado',
@@ -135,7 +137,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-mar-tierra.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-4-quesos',
@@ -150,7 +152,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-4-quesos.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-capressa',
@@ -165,7 +167,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-4-quesos.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-philly-cheese',
@@ -180,7 +182,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-philly.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-primavera',
@@ -195,7 +197,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-gratinado.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'pepito-triple-gratinado',
@@ -210,7 +212,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/pepito-lomito.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
 
   // ==========================================
@@ -229,7 +231,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'smash-bacon-cheese-burguer',
@@ -244,7 +246,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'smash-champinon-burguer',
@@ -259,7 +261,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'smash-burguer-house-251',
@@ -274,7 +276,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'doble-smash-burger',
@@ -289,7 +291,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/doble-smash.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'triple-smash-mixta',
@@ -304,7 +306,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/doble-smash.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'triple-especial-solomo',
@@ -319,7 +321,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/doble-smash.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
 
   // ==========================================
@@ -338,7 +340,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/club-house.jpg',
     bgAccent: 'bg-orange-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'sandwich-de-pernil',
@@ -353,7 +355,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/sandwich-pernil.jpg',
     bgAccent: 'bg-orange-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'perro-caliente-tradicional',
@@ -368,7 +370,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/perro-caliente.jpg',
     bgAccent: 'bg-orange-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
 
   // ==========================================
@@ -387,7 +389,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-teal-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'ensalada-cesar-pollo',
@@ -402,7 +404,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-teal-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'ensalada-cesar-camaron',
@@ -417,7 +419,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-teal-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
 
   // ==========================================
@@ -436,7 +438,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'papas-grandes',
@@ -451,7 +453,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'papas-queso-pqna',
@@ -466,7 +468,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/papas-queso-bacon.jpg',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'papas-queso-grde',
@@ -481,7 +483,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: '/images/products/papas-queso-bacon.jpg',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'nuggets-pollo',
@@ -496,7 +498,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'mini-empanadas-queso',
@@ -511,7 +513,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1628294895950-9805252327bc?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'extra-salsa',
@@ -526,7 +528,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
 
   // ==========================================
@@ -545,7 +547,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'malta',
@@ -560,7 +562,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'cerveza-polar',
@@ -575,7 +577,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1608270119337-14231b54a6db?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'refresco-lata',
@@ -590,7 +592,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'yukipack',
@@ -605,7 +607,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'agua',
@@ -620,7 +622,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'agua-gasificada',
@@ -635,7 +637,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1559839914-ba2a0f8b8989?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'refresco-1-25',
@@ -650,7 +652,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1581098365948-6a5a912b7a49?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'cerveza-solera',
@@ -665,7 +667,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1608270119337-14231b54a6db?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'lipton',
@@ -680,7 +682,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'refresco-1-5',
@@ -695,7 +697,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1581098365948-6a5a912b7a49?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'refresco-2',
@@ -710,7 +712,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1581098365948-6a5a912b7a49?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   },
   {
     id: 'verano',
@@ -725,7 +727,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80',
     bgAccent: 'bg-amber-600',
     isAvailable: true,
-    availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
+    availableDays: ALL_DAYS
   }
 ];
 
