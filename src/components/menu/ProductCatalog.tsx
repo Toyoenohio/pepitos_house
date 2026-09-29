@@ -13,8 +13,12 @@ interface Props {
    * pantalla). En /menu es la única sección, así que es el H1 de la página.
    */
   headingLevel?: 'h1' | 'h2';
+  featuredOnly?: boolean;
 }
-export default function ProductCatalog({ products, categories, headingLevel = 'h2' }: Props) {
+
+const FEATURED_IDS = ['pepito-clasico', 'pepito-gratinado', 'doble-smash-burger'];
+
+export default function ProductCatalog({ products, categories, headingLevel = 'h2', featuredOnly = false }: Props) {
   const Heading = headingLevel;
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -29,7 +33,16 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
   // (index.astro / menu.astro leen Neon). El navegador no decide qué está disponible.
   const effectiveProducts = products;
 
+  const featuredProducts = useMemo(() => {
+    if (!featuredOnly) return [];
+    const items = FEATURED_IDS
+      .map(id => effectiveProducts.find(p => p.id === id))
+      .filter((p): p is MenuItem => Boolean(p));
+    return items.length === 3 ? items : effectiveProducts.slice(0, 3);
+  }, [featuredOnly, effectiveProducts]);
+
   const filteredProducts = useMemo(() => {
+    if (featuredOnly) return [];
     return effectiveProducts.filter(p => {
       const matchesCat = selectedCategory === 'all' || p.category === selectedCategory;
       const query = searchQuery.toLowerCase().trim();
@@ -39,7 +52,9 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
         p.stats.toLowerCase().includes(query);
       return matchesCat && matchesSearch;
     });
-  }, [effectiveProducts, selectedCategory, searchQuery]);
+  }, [effectiveProducts, selectedCategory, searchQuery, featuredOnly]);
+
+  const productsToRender = featuredOnly ? featuredProducts : filteredProducts;
 
   function quickAdd(prod: MenuItem, isAvailableNow: boolean) {
     if (!isAvailableNow) return;
@@ -67,62 +82,80 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
 
   return (
     <div className="space-y-6">
-      {/* Hero Banner */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-black pb-4">
-        <div>
-          <span className="inline-block bg-white text-black text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-black mb-2 shadow-brutal uppercase tracking-wider">
-            Auténtico Sabor Guaro en Anzoátegui
-          </span>
-          <Heading className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
-            Menú 251
-          </Heading>
+      {/* Header Banner */}
+      {featuredOnly ? (
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-black pb-4">
+          <div>
+            <span className="inline-block bg-white text-black text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-black mb-2 shadow-brutal uppercase tracking-wider">
+              Los Favoritos de la Casa
+            </span>
+            <Heading className="font-display font-black text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-none">
+              Productos Destacados
+            </Heading>
+          </div>
+          <div className="text-sm font-semibold text-black/80 max-w-md">
+            Nuestras recetas más pedidas: ingredientes seleccionados, carne de primera a la plancha, quesos fundidos y salsas de la casa en pan recién horneado.
+          </div>
         </div>
-        <div className="text-sm font-semibold text-black/80 max-w-md">
-          Especialistas en pepitos guaros monumentales, carne tierna a la plancha, queso pecorino y salsas caseras. Delivery en Barcelona, Lechería y Puerto La Cruz.
+      ) : (
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-black pb-4">
+          <div>
+            <span className="inline-block bg-white text-black text-[11px] font-extrabold px-3 py-0.5 rounded-full border-2 border-black mb-2 shadow-brutal uppercase tracking-wider">
+              Auténtico Sabor Guaro en Anzoátegui
+            </span>
+            <Heading className="font-display font-black text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight leading-none">
+              Menú 251
+            </Heading>
+          </div>
+          <div className="text-sm font-semibold text-black/80 max-w-md">
+            Especialistas en pepitos guaros monumentales, carne tierna a la plancha, queso pecorino y salsas caseras. Delivery en Barcelona, Lechería y Puerto La Cruz.
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Search Bar */}
-      <div className="relative max-w-2xl">
-        <input 
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Buscar pepito de lomito, salsa de maíz dulce, papas, hamburguesa..."
-          className="w-full bg-white border-2 border-black rounded-full py-2.5 pl-11 pr-4 text-sm font-semibold outline-none focus:ring-2 focus:ring-brandBlue shadow-brutal"
-        />
-        <svg className="w-5 h-5 text-gray-700 absolute left-4 top-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
-      </div>
+      {/* Search & Categories (solo en vista completa de menú) */}
+      {!featuredOnly && (
+        <>
+          <div className="relative max-w-2xl">
+            <input 
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar pepito de lomito, salsa de maíz dulce, papas, hamburguesa..."
+              className="w-full bg-white border-2 border-black rounded-full py-2.5 pl-11 pr-4 text-sm font-semibold outline-none focus:ring-2 focus:ring-brandBlue shadow-brutal"
+            />
+            <svg className="w-5 h-5 text-gray-700 absolute left-4 top-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
 
-      {/* Category Filter Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar">
-        <button 
-          onClick={() => setSelectedCategory('all')}
-          className={`px-5 py-2 rounded-full border-2 border-black font-display font-extrabold text-sm uppercase tracking-wide whitespace-nowrap shadow-brutal transition-all ${selectedCategory === 'all' ? 'bg-black text-white' : 'bg-white text-black hover:bg-brandYellowDark'}`}
-        >
-          Todos ({products.length})
-        </button>
-        {categories.map((cat) => (
-          <button 
-            key={cat.slug}
-            onClick={() => setSelectedCategory(cat.slug)}
-            className={`px-5 py-2 rounded-full border-2 border-black font-display font-extrabold text-sm uppercase tracking-wide whitespace-nowrap shadow-brutal transition-all flex items-center gap-1.5 ${selectedCategory === cat.slug ? 'bg-black text-white' : 'bg-white text-black hover:bg-brandYellowDark'}`}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar">
+            <button 
+              onClick={() => setSelectedCategory('all')}
+              className={`px-5 py-2 rounded-full border-2 border-black font-display font-extrabold text-sm uppercase tracking-wide whitespace-nowrap shadow-brutal transition-all ${selectedCategory === 'all' ? 'bg-black text-white' : 'bg-white text-black hover:bg-brandYellowDark'}`}
+            >
+              Todos ({products.length})
+            </button>
+            {categories.map((cat) => (
+              <button 
+                key={cat.slug}
+                onClick={() => setSelectedCategory(cat.slug)}
+                className={`px-5 py-2 rounded-full border-2 border-black font-display font-extrabold text-sm uppercase tracking-wide whitespace-nowrap shadow-brutal transition-all flex items-center gap-1.5 ${selectedCategory === cat.slug ? 'bg-black text-white' : 'bg-white text-black hover:bg-brandYellowDark'}`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
 
-      {/* Products Count */}
-      <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-black/70">
-        <span>Mostrando {filteredProducts.length} delicias guaras</span>
-      </div>
+          <div className="flex items-center justify-between text-xs font-black uppercase tracking-wider text-black/70">
+            <span>Mostrando {filteredProducts.length} delicias guaras</span>
+          </div>
+        </>
+      )}
 
       {/* Products Grid */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
-        {filteredProducts.length === 0 ? (
+        {productsToRender.length === 0 ? (
           <div className="col-span-full text-center py-12 bg-white rounded-3xl border-4 border-black p-6 shadow-brutal">
             <h3 className="font-display font-black text-xl uppercase mt-2">No encontramos ese producto</h3>
             <p className="text-xs text-gray-600 mt-1">Prueba buscando "pepito", "lomito", "queso" o "papas".</p>
@@ -134,7 +167,7 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
             </button>
           </div>
         ) : (
-          filteredProducts.map((product) => {
+          productsToRender.map((product) => {
             const isAvailableNow = product.isAvailable !== false && isItemAvailableToday(product.availableDays);
 
             return (
@@ -246,6 +279,19 @@ export default function ProductCatalog({ products, categories, headingLevel = 'h
           })
         )}
       </section>
+
+      {/* Botón Ver Menú Completo (solo en vista destacada) */}
+      {featuredOnly && (
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <a 
+            href="/menu" 
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-black hover:bg-brandBlue text-white font-display font-black text-sm sm:text-base px-8 py-4 rounded-full border-3 border-black shadow-brutal hover:shadow-brutal-lg transition-all uppercase tracking-wide cursor-pointer"
+          >
+            <span>Ver Menú Completo</span>
+            <span className="text-brandYellow font-extrabold">→</span>
+          </a>
+        </div>
+      )}
 
       {/* Personalization Modal */}
       <ProductModal 

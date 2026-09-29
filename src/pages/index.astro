@@ -115,13 +115,95 @@ const products = applyOverrides(INITIAL_PRODUCTS, await loadOverrides(Astro.loca
     </section>
 
 
-    <!-- Menu Preview / Interactive Catalog -->
-    <section id="menu-catalog" class="pt-6">
+    <!-- Menu Preview / 3 Featured Products -->
+    <section id="menu-destacados" class="pt-2">
       <ProductCatalog 
         products={products} 
         categories={INITIAL_CATEGORIES} 
+        featuredOnly={true}
         client:load 
       />
+    </section>
+
+    <!-- Google Maps & Location Section -->
+    <section class="bg-white rounded-3xl border-4 border-black p-6 sm:p-8 shadow-brutal-lg space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-black pb-4">
+        <div>
+          <span class="inline-block bg-brandYellow text-black text-[11px] font-black px-3 py-0.5 rounded-full border-2 border-black mb-2 shadow-brutal uppercase tracking-wider">
+            Visítanos en el Local
+          </span>
+          <h2 class="font-display font-black text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight leading-none">
+            ¿Dónde Estamos?
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm font-semibold text-black/80 max-w-md">
+          Ven a vivir la experiencia en vivo o coordina tu pedido con delivery a Barcelona, Lechería y Puerto La Cruz.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <!-- Info Cards Column -->
+        <div class="space-y-4">
+          <div class="bg-brandCream p-4 sm:p-5 rounded-2xl border-3 border-black shadow-brutal space-y-1.5">
+            <span class="text-[10px] font-black uppercase text-brandBlue tracking-wider">Dirección</span>
+            <h3 class="font-display font-black text-base uppercase">Pepitos House 251</h3>
+            <p class="text-xs font-semibold text-gray-700 leading-relaxed">
+              Barcelona, Estado Anzoátegui, Venezuela. Ubicación accesible para consumo en el local y retiro de pedidos.
+            </p>
+          </div>
+
+          <div class="bg-brandCream p-4 sm:p-5 rounded-2xl border-3 border-black shadow-brutal space-y-1.5">
+            <span class="text-[10px] font-black uppercase text-emerald-700 tracking-wider">Zona de Delivery</span>
+            <h3 class="font-display font-black text-base uppercase">Gran Barcelona y Norte</h3>
+            <p class="text-xs font-semibold text-gray-700 leading-relaxed">
+              Despachamos directo a Barcelona, Lechería y Puerto La Cruz con empaques térmicos para que llegue caliente.
+            </p>
+          </div>
+
+          <div class="bg-brandCream p-4 sm:p-5 rounded-2xl border-3 border-black shadow-brutal space-y-1.5">
+            <span class="text-[10px] font-black uppercase text-purple-700 tracking-wider">Ruta GPS</span>
+            <h3 class="font-display font-black text-base uppercase">Navega en tu Teléfono</h3>
+            <p class="text-xs font-semibold text-gray-700 mb-2">
+              Abre la ubicación directamente en Google Maps para trazar tu ruta en tiempo real.
+            </p>
+            <a 
+              href="https://www.google.com/maps/place/Pepitos+House+251/@10.1477961,-64.6914144,17z" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 bg-black hover:bg-brandBlue text-white font-display font-black text-xs px-4 py-2 rounded-full border-2 border-black shadow-brutal uppercase transition-colors"
+            >
+              <span>Abrir en Google Maps</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Responsive Map Frame Column -->
+        <div class="lg:col-span-2 rounded-2xl border-3 border-black shadow-brutal overflow-hidden bg-brandYellow relative">
+          <!-- Brutalist Top Window Header -->
+          <div class="bg-black text-white px-4 py-2.5 border-b-2 border-black flex items-center justify-between text-xs font-display font-black uppercase">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500 border border-white"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-brandYellow border border-white"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-green-500 border border-white"></span>
+              <span class="ml-2 tracking-wider text-[11px]">Ubicación en Tiempo Real</span>
+            </div>
+            <span class="text-brandYellow text-[10px]">Google Maps</span>
+          </div>
+
+          <!-- Responsive iframe container -->
+          <div class="w-full aspect-[4/3] sm:aspect-[16/10] md:h-[400px]">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.4037835199947!2d-64.6914144!3d10.147796099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2d7366cf2ce667%3A0x7ace07d770acfe12!2sPepitos%20House%20251!5e0!3m2!1ses-419!2sve!4v1790712628494!5m2!1ses-419!2sve" 
+              class="w-full h-full border-0 block" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="Ubicación de Pepitos House 251 en Google Maps"
+            ></iframe>
+          </div>
+        </div>
+      </div>
     </section>
 
   </div>
