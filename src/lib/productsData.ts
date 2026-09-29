@@ -57,7 +57,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🥩 250g Proteína • 🍟 Papas Fritas',
     description: '250 Grs de Lomito, Pollo o Mixto con Tocineta crocante y abundante Queso Pecorino en un Pan de la casa de 29 cm, acompañado de Papas Fritas.',
     dressing: 'Salsa Tártara y de Ajo Guara',
-    image: 'https://images.unsplash.com/photo-1627042633706-0150c1800752?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-clasico.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -72,7 +72,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🍄 Champiñones • 🧀 Pecorino',
     description: '250 Grs de Lomito, Pollo, Mixto o Triple con Champiñones salteados y Queso Pecorino en un Pan de la casa de 29 cm, acompañado de Papas Fritas.',
     dressing: 'Salsas de la casa y ajo',
-    image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-champinon.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -87,7 +87,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🧀 Mozzarella Fundido • 🥓 Tocineta',
     description: '250 Grs entre Lomito, Pollo, Mixto o Triple con Tocineta, generosa capa de Queso Mozzarella gratinado y Queso Pecorino en Pan de la casa de 29 cm, con Papas Fritas.',
     dressing: 'Salsa Tártara y Maíz',
-    image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-gratinado.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -102,7 +102,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🥩 Puro Lomito • 🧀 Mozzarella Gratinado',
     description: '250 Grs de puro lomito de res tierno a la plancha, tocineta ahumada crujiente, mozzarella gratinado al horno y pecorino en pan de la casa de 29 cm con papas.',
     dressing: 'Mantequilla de Ajo y Tártara Especial',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-lomito.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -117,7 +117,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🍤 Camarones • 🥩 Lomito o Pollo',
     description: '250 Grs entre Lomito o Pollo y jugosos Camarones a la plancha, Tocineta crocante y Queso Pecorino en Pan de la casa de 29 cm, acompañado de Papas Fritas.',
     dressing: 'Mantequilla de Ajo y Tártara de la Casa',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-mar-tierra.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -132,7 +132,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🍤 Camarones • 🧀 Mozzarella Gratinado',
     description: 'Combinación gourmet de Camarones a la plancha y Lomito o Pollo con tocineta, cubierto con generoso queso mozzarella gratinado al horno y pecorino con papas.',
     dressing: 'Mantequilla de Ajo y Tártara Especial',
-    image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-mar-tierra.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -147,7 +147,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🧀 Crema + Americano + Mozzarella + Pecorino',
     description: '250 Grs Proteína Lomito, Pollo, Mixto o Triple con Tocineta, Queso Crema, Queso Americano, Mozzarella y Queso Pecorino en Pan de 29 cm con Papas Fritas.',
     dressing: 'Salsas de la casa y crema de queso',
-    image: 'https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-4-quesos.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -162,7 +162,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🐐 Queso de Cabra • 🌿 Mayonesa Albahaca',
     description: '250 Grs entre Lomito, Pollo, Mixto o Triple con Tocineta, Tomates frescos, Queso de Cabra artesanal y Mayonesa de Albahaca en Pan de la casa de 29 cm.',
     dressing: 'Mayonesa de Albahaca Artesanal',
-    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-4-quesos.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -177,7 +177,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🥩 Lomito Tierno • 🧀 Queso Americano',
     description: '250 Grs entre Lomito, cebollas salteadas caramelizadas con abundante Queso Americano en Pan de la casa de 29 cm, acompañado de Papas Fritas.',
     dressing: 'Salsa de Queso y Aliño de la Casa',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-philly.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -192,7 +192,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🌽 Maíz Tierno • 🥓 Tocineta Troceada',
     description: 'Pan de la casa con 250g de proteínas (Lomito, Pollo o Mixto), capa de cremoso mozzarella, tocineta troceada, maíz y pecorino en pan de 29 cm con papas.',
     dressing: 'Salsa de Maíz Dulce y Tártara',
-    image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-gratinado.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -207,7 +207,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥖 29cm • 🥩 Lomito + Pollo + Chuleta • 🧀 Gratinado',
     description: '250 Grs de proteínas de lomito, pollo y chuleta ahumada, queso pecorino, salsas de la casa y ración de papas fritas en pan de la casa de 29 cm.',
     dressing: 'Salsas de la Casa y Ajo Guaro',
-    image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/pepito-lomito.jpg',
     bgAccent: 'bg-brandBlue',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -226,7 +226,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍔 120g Solomo Smash • 🧀 Queso Americano • 🍟 Papas Fritas',
     description: 'Pan de papa artesanal con 120 Grs Solomo Smash, Queso Americano, pepinillos crujientes y salsa de la casa, acompañado de Papas Fritas.',
     dressing: 'Salsa Especial de la Casa',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -241,7 +241,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍔 120g Solomo • 🥓 Tocineta • 🧀 Queso Americano',
     description: 'Pan de papa artesanal con 120 Grs Solomo Smash, Queso Americano, tocineta crujiente, pepinillos y salsa de la casa, acompañado de Papas Fritas.',
     dressing: 'Salsa de la Casa y Ajo',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -256,7 +256,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍔 120g Solomo • 🍄 Champiñón • 🥓 Tocineta',
     description: 'Pan de papa con 120 Grs Solomo Smash, Queso Americano, champiñones salteados, tocineta, pepinillos y salsa de la casa, con Papas Fritas.',
     dressing: 'Salsa Especial de la Casa',
-    image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -271,7 +271,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍔 120g Solomo • 🧅 Cebollas Caramelizadas • 🍄 Champiñón',
     description: 'Pan de papa con 120 Grs Solomo Smash, Queso Americano, tocineta, champiñón, cebollas caramelizadas, pepinillos y salsa de la casa, con Papas Fritas.',
     dressing: 'Salsa Especial House 251',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/smash-cheese.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -286,7 +286,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍔 250g Carne • 🧀 Doble Facilitas Kraft • 🥒 Pepinillos',
     description: 'Delicioso pan de papa, 250 Grs de carne de primera (solomo o mixta), doble queso Facilitas Kraft, pepinillos y salsa especial de la casa con papas.',
     dressing: 'Salsa Especial de la Casa',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/doble-smash.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -301,7 +301,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍔 3 Carnes • 🍳 Huevo • 🥓 Tocineta • 🧀 Queso Kraft',
     description: '3 tipos de carnes: Solomo, Cerdo y Pollo, queso Facilitas Kraft, tocineta crocante, huevo y vegetales frescos, acompañado de papas fritas.',
     dressing: 'Salsa Especial y Ajo de la Casa',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/doble-smash.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -316,7 +316,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍔 3 Patties Solomo • 🧀 Queso Kraft • 🥓 Tocineta',
     description: 'Para verdaderos amantes de la carne: 3 smash patties de puro solomo, queso Facilitas Kraft, tocineta crujiente, huevo y vegetales con papas fritas.',
     dressing: 'Salsa Especial House 251',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/doble-smash.jpg',
     bgAccent: 'bg-emerald-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -335,7 +335,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥪 4 Pisos • 🍗 Pollo + Jamón + Gouda • 🥤 Refresco 1L',
     description: 'El clásico sándwich Club House con pollo a la plancha, jamón, queso gouda, vegetales frescos, huevo, salsas tradicionales y abundantes papas fritas. ¡Incluye Refresco 1L!',
     dressing: 'Salsas Tradicionales y Tártara',
-    image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/club-house.jpg',
     bgAccent: 'bg-orange-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -350,7 +350,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🥪 Pan Canilla de la Casa • 🐷 Pernil Jugoso • 🍅 Vegetales',
     description: 'Pan canilla de la casa recién horneado, tomate fresco, lechuga, jugosos trozos de cerdo con un toque especial y salsa de la casa con papas fritas.',
     dressing: 'Salsa Especial de la Casa',
-    image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/sandwich-pernil.jpg',
     bgAccent: 'bg-orange-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -365,7 +365,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🌭 Salchicha • 🧀 Queso Blanco Llanero • 🥔 Papitas Crunch',
     description: 'Clásico perro caliente con salchicha al vapor, cebollita finamente picada, lluvia crocante de papitas, queso blanco rallado y salsas tradicionales.',
     dressing: 'Salsas Tradicionales de la Casa',
-    image: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/perro-caliente.jpg',
     bgAccent: 'bg-orange-600',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -463,7 +463,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍟 Papas Crujientes • 🧀 Queso Fundido • 🥓 Tocineta',
     description: 'Papas fritas crujientes bañadas en queso derretido caliente y lluvia de tocineta crocante dorada.',
     dressing: 'Salsa de Queso Especial',
-    image: 'https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/papas-queso-bacon.jpg',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
@@ -478,7 +478,7 @@ export const INITIAL_PRODUCTS: MenuItem[] = [
     stats: '🍟 Canasta Grande • 🧀 Full Queso • 🥓 Abundante Bacon',
     description: 'Canasta grande de papas fritas crujientes bañadas en generosa salsa de queso derretido y lluvia abundante de tocineta crujiente.',
     dressing: 'Salsa de Queso Especial',
-    image: 'https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=600&q=80',
+    image: '/images/products/papas-queso-bacon.jpg',
     bgAccent: 'bg-purple-700',
     isAvailable: true,
     availableDays: ['thu', 'fri', 'sat', 'sun', 'mon']
